@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+    <div class='col-md-12'>
+        <h3 class="text-center">Tem certeza que deseja deletar {{ teacher.user.name }}?</h3>
+        <form class="text-center" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="btn-group" role="group" aria-label="User operations">
+                <a class="btn btn-primary" href="{% url 'users_list' %}" role="button">Voltar</a>
+                <button type="submit" class="btn btn-danger">Tenho certeza</button>
+            </div>
+
+        </form>
+    </div>
+
+{% endblock %}
