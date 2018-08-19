@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block title %} Administracao {% endblock %}
+
+{% block main %}
+    <h3>Novo usuário</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ users_form|bootstrap }}
+        {{ teachers_form|bootstrap }}
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+{% endblock %}
