@@ -4,6 +4,5 @@ django-bootstrap==0.2.4
 django-bootstrap-form==3.4
 django-jet==1.0.7
 feedparser==5.2.1
-pkg-resources==0.0.0
 pytz==2018.5
 whitenoise==4.0
