@@ -25,7 +25,7 @@ SECRET_KEY = '+a)f8!76t!^(_w1021=ztt*2h(likl#l)t0g**m(dz_=*ur9n@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tccapp-next-release.herokuapp.com', 'localhost']
 
 
 # Application definition
