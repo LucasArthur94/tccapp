@@ -1,20 +1,20 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from .managers import UserManager
 
-class User(models.Model):
-    REQUIRED_FIELDS = ('name', 'email', 'created_at', 'updated_at')
+class User(AbstractUser):
+    REQUIRED_FIELDS = ['name']
+    USERNAME_FIELD = 'email'
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(
+        max_length=100,
+    )
     email = models.EmailField(
         unique=True,
         db_index=True
     )
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    objects = UserManager()
 
 # User role models below
 
@@ -70,6 +70,7 @@ class Teacher(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
+
 
 class Guest(models.Model):
     """specific role model"""

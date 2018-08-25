@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             <h3 class="text-center">Listagem de Professores</h3>
-            {% if teachers.count > 0 %}
+            {% if teachers|length > 0 %}
                 <table class="table">
                     <thead>
                         <tr>
@@ -34,9 +34,10 @@
                   </tbody>
                 </table>
             {% else %}
-                <h2>Sem professores cadastrados!</h2>
+                <br />
+                <h2 class='text-center'>Sem docentes cadastrados!</h2>
             {% endif %}
-            <a href="{% url 'teachers_new' %}" class="btn btn-primary float-right"> Novo Professor</a>
+            <a href="{% url 'teachers_new' %}" class="btn btn-primary float-right"> Novo Docente</a>
             <div class="clearfix"></div>
         </div>
     </div>
