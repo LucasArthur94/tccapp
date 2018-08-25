@@ -2,13 +2,21 @@
 {% load bootstrap %}
 
 {% block main %}
-    <div class='col-md-12'>
-        <h3 class='text-center'>Login</h3>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form|bootstrap }}
-            <button type="submit" class="btn btn-primary float-right">Entrar</button>
+    {% if user.is_authenticated %}
+        <div class='col-md-12 text-center'>
+            <h1 class='text-center'>Você já está autenticado no sistema!</h1>
+            <a href="{% url 'home' %}" class="btn btn-primary">Voltar</a>
             <div class="clearfix"></div>
-        </form>
-    </div>
+        </div>
+        {% else %}
+        <div class='col-md-12'>
+            <h3 class='text-center'>Login</h3>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <button type="submit" class="btn btn-primary float-right">Entrar</button>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}
