@@ -6,12 +6,12 @@ from .forms import  UsersForm, StudentsForm, TeachersForm, GuestsForm, Coordinat
 # Create your views here.
 
 @login_required
-def users_list(request):
+def teachers_list(request):
     teachers = Teacher.objects.all()
-    return render(request, 'users.html', {'teachers': teachers})
+    return render(request, 'teachers.html', {'teachers': teachers})
 
 @login_required
-def users_new(request):
+def teachers_new(request):
     users_form = UsersForm(request.POST or None)
     teachers_form = TeachersForm(request.POST or None)
 
@@ -20,11 +20,11 @@ def users_new(request):
         new_teacher = teachers_form.save(commit=False)
         new_teacher.user_id = new_user.pk
         new_teacher.save()
-        return redirect('users_list')
-    return render(request, 'user_form.html', {'users_form': users_form, 'teachers_form': teachers_form})
+        return redirect('teachers_list')
+    return render(request, 'teacher_form.html', {'users_form': users_form, 'teachers_form': teachers_form})
 
 @login_required
-def users_update(request, id):
+def teachers_update(request, id):
     teacher = get_object_or_404(Teacher, pk=id)
     teachers_form = TeachersForm(request.POST or None, request.FILES or None, instance=teacher)
     users_form = UsersForm(request.POST or None, request.FILES or None, instance=teacher.user)
@@ -34,17 +34,17 @@ def users_update(request, id):
         new_teacher = teachers_form.save(commit=False)
         new_teacher.user_id = new_user.pk
         new_teacher.save()
-        return redirect('users_list')
+        return redirect('teachers_list')
     print(users_form)
-    return render(request, 'user_form.html', {'users_form': users_form, 'teachers_form': teachers_form})
+    return render(request, 'teacher_form.html', {'users_form': users_form, 'teachers_form': teachers_form})
 
 @login_required
-def users_delete(request, id):
+def teachers_delete(request, id):
     teacher = get_object_or_404(Teacher, pk=id)
 
     if request.method == 'POST':
         teacher.user.delete()
         teacher.delete()
-        return redirect('users_list')
+        return redirect('teachers_list')
 
-    return render(request, 'user_delete_confirm.html', {'teacher': teacher})
+    return render(request, 'teacher_delete_confirm.html', {'teacher': teacher})

@@ -138,6 +138,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_URL = '/login/'
 
-LOGIN_REDIRECT_URL = 'users_list'
+LOGIN_REDIRECT_URL = 'teachers_list'
 
 django_heroku.settings(locals())

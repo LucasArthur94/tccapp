@@ -21,11 +21,11 @@
                             <th>{{ teacher.user.email }}</th>
                             <th>{{ teacher.usp_number }}</th>
                             <th>
-                                <a href="{% url 'users_delete' teacher.pk %}">
+                                <a href="{% url 'teachers_delete' teacher.pk %}">
                                     <span class="fas fa-trash-alt"></span>
                                 </a>
                                 |
-                                <a href="{% url 'users_update' teacher.pk %}">
+                                <a href="{% url 'teachers_update' teacher.pk %}">
                                     <span class="fas fa-user-edit"></span>
                                 </a>
                             </th>
@@ -36,7 +36,7 @@
             {% else %}
                 <h2>Sem professores cadastrados!</h2>
             {% endif %}
-            <a href="{% url 'users_new' %}" class="btn btn-primary float-right"> Novo Professor</a>
+            <a href="{% url 'teachers_new' %}" class="btn btn-primary float-right"> Novo Professor</a>
             <div class="clearfix"></div>
         </div>
     </div>
