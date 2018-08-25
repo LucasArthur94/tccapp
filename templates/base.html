@@ -15,12 +15,23 @@
 <body>
     {% block navbar %}
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">TCC Poli USP</a>
+          <a class="navbar-brand" href="{% url 'home' %}">TCC Poli USP</a>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item {% active_link 'users_list' %}">
                 <a class="nav-link" href="{% url 'users_list' %}">Docentes</a>
+              </li>
+            </ul>
+          </div>
+          <div class="collapse navbar-collapse" id="navBarOperations">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                {% if user.is_authenticated %}
+                  <a class="nav-link" href="{% url 'logout' %}">Sair</a>
+                {% else %}
+                  <a class="nav-link" href="{% url 'login' %}">Entrar</a>
+                {% endif %}
               </li>
             </ul>
           </div>

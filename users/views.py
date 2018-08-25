@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import  User, Student, Teacher, Guest, Coordinator
 from .forms import  UsersForm, StudentsForm, TeachersForm, GuestsForm, CoordinatorsForm
 
 # Create your views here.
 
+@login_required
 def users_list(request):
     teachers = Teacher.objects.all()
     return render(request, 'users.html', {'teachers': teachers})
 
+@login_required
 def users_new(request):
     users_form = UsersForm(request.POST or None)
     teachers_form = TeachersForm(request.POST or None)
@@ -20,6 +23,7 @@ def users_new(request):
         return redirect('users_list')
     return render(request, 'user_form.html', {'users_form': users_form, 'teachers_form': teachers_form})
 
+@login_required
 def users_update(request, id):
     teacher = get_object_or_404(Teacher, pk=id)
     teachers_form = TeachersForm(request.POST or None, request.FILES or None, instance=teacher)
@@ -34,6 +38,7 @@ def users_update(request, id):
     print(users_form)
     return render(request, 'user_form.html', {'users_form': users_form, 'teachers_form': teachers_form})
 
+@login_required
 def users_delete(request, id):
     teacher = get_object_or_404(Teacher, pk=id)
 

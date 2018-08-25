@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 from users import urls as users_urls
+from home import urls as home_urls
 
 urlpatterns = [
     # path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
     # path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
+    path('', include(home_urls)),
     path('users/', include(users_urls), name='users'),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
     path('admin/', admin.site.urls),
 ]

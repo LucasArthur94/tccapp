@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrapform',
     'active_link',
+    'home',
     'users',
 ]
 
@@ -138,5 +139,9 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'statics')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+LOGIN_URL = '/login/'
+
+LOGIN_REDIRECT_URL = 'users_list'
 
 django_heroku.settings(locals())
