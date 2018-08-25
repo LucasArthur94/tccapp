@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">Listagem de Disciplinas</h3>
+            {% if disciplines|length > 0 %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Modalidade</th>
+                            <th scope="col">Data de Cadastro</th>
+                            <th scope="col">Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for discipline in disciplines %}
+                        <tr>
+                            <th>{{ discipline.modality }}</th>
+                            <th>{{ discipline.created_at }}</th>
+                            <th>
+                                {# <a href="{% url 'disciplines_delete' teacher.pk %}">
+                                    <span class="fas fa-trash-alt"></span>
+                                </a>
+                                |
+                                <a href="{% url 'disciplines_update' teacher.pk %}">
+                                    <span class="fas fa-user-edit"></span>
+                                </a> #}
+                            </th>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+            {% else %}
+                <br />
+                <h2 class='text-center'>Sem disciplinas cadastradas!</h2>
+            {% endif %}
+            <a href="{% url 'disciplines_new' %}" class="btn btn-primary float-right"> Nova Disciplina</a>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+{% endblock %}
