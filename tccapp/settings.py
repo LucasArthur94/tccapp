@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import django_heroku
 
+from decouple import config
+from dj_database_url import parse as dburl
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,13 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+a)f8!76t!^(_w1021=ztt*2h(likl#l)t0g**m(dz_=*ur9n@'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['tccapp-next-release.herokuapp.com', 'localhost']
-
 
 # Application definition
 
@@ -80,17 +82,11 @@ WSGI_APPLICATION = 'tccapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME', 'tccapp'),
-        'USER': os.environ.get('DB_USER', 'tccapp'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'tccapp'),
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+DEFAULT_DBURL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
+DATABASES = {
+    'default': config('DATABASE_URL', default=DEFAULT_DBURL, cast=dburl),
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -136,7 +132,7 @@ STATICFILES_DIRS = [
     'statics',
 ]
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'statics')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
