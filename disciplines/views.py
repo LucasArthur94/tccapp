@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from tablib import Dataset
 from .models import  Discipline
-from .forms import  DisciplinesForm
+from .forms import  DisciplinesForm, StudentBulkRegisterForm
+from .resources import UserResource, StudentResource
 
 # Create your views here.
 
@@ -49,3 +51,26 @@ def disciplines_delete(request, id):
         return redirect('disciplines_list')
 
     return render(request, 'discipline_delete_confirm.html', {'discipline': discipline})
+
+@login_required
+def student_bulk_register(request):
+    if request.method == 'POST':
+        user_resource = UserResource()
+        student_resource = StudentResource()
+        dataset = Dataset()
+        new_students = request.FILES['students_csv']
+
+        imported_data = dataset.load(new_students.read())
+
+        users_result = user_resource.import_data(dataset, dry_run=True)
+        students_result = student_resource.import_data(dataset, dry_run=True)
+
+        if not users_result.has_errors() and not students_result.has_errors():
+            user_resource.import_data(dataset, dry_run=False)
+            student_resource.import_data(dataset, dry_run=False)
+
+        disciplines_form = DisciplinesForm(request.POST or None)
+        return render(request, 'discipline_form.html', {'disciplines_form': disciplines_form})
+
+    student_bulk_register_form = StudentBulkRegisterForm(request.POST or None)
+    return render(request, 'student_bulk_register_form.html', {'student_bulk_register_form': student_bulk_register_form})

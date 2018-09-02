@@ -10,15 +10,25 @@
                         <thead>
                             <tr>
                                 <th scope="col">Modalidade</th>
-                                <th scope="col">Data de Cadastro</th>
+                                <th scope="col">Data de Início</th>
+                                <th scope="col">Data de Término</th>
                                 <th scope="col">Opções</th>
                             </tr>
                         </thead>
                         <tbody>
                         {% for discipline in disciplines %}
                             <tr>
-                                <th>{{ discipline.modality }}</th>
-                                <th>{{ discipline.created_at }}</th>
+                                <th>
+                                    {% if discipline.modality == 'QDR' %}
+                                        Quadrimestral
+                                    {% elif discipline.modality == 'SMS' %}
+                                        Semestral
+                                    {% else %}
+                                        {{ discipline.modality }}
+                                    {% endif %}
+                                </th>
+                                <th>{{ discipline.start_date }}</th>
+                                <th>{{ discipline.end_date }}</th>
                                 <th>
                                     <a href="{% url 'disciplines_delete' discipline.pk %}">
                                         <span class="fas fa-trash-alt"></span>

@@ -1,4 +1,4 @@
-from django.forms import ModelForm, DateInput
+from django.forms import Form, FileField, ModelForm, DateInput
 from users.models import User
 from .models import  Discipline
 from users.models import User
@@ -27,3 +27,6 @@ class DisciplinesForm(ModelForm):
             ),
         }
 
+
+class StudentBulkRegisterForm(Form):
+    students_csv = FileField(label='Arquivo com as informações dos alunos: ')

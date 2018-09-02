@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block main %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ student_bulk_register_form|bootstrap }}
+        <button type="submit">Cadastrar</button>
+    </form>
+{% endblock %}
