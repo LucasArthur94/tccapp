@@ -18,7 +18,34 @@ def disciplines_new(request):
     disciplines_form = DisciplinesForm(request.POST or None)
 
     if disciplines_form.is_valid():
-        disciplines_form.save(commit=False)
+        disciplines_form.save()
 
         return redirect('disciplines_list')
     return render(request, 'discipline_form.html', {'disciplines_form': disciplines_form})
+
+@login_required
+def disciplines_update(request, id):
+    if not request.user.is_staff:
+        return render(request, 'statuses/401.html')
+
+    discipline = get_object_or_404(Discipline, pk=id)
+    disciplines_form = DisciplinesForm(request.POST or None, request.FILES or None, instance=discipline)
+
+    if disciplines_form.is_valid():
+        disciplines_form.save()
+        return redirect('disciplines_list')
+
+    return render(request, 'discipline_form.html', {'disciplines_form': disciplines_form})
+
+@login_required
+def disciplines_delete(request, id):
+    if not request.user.is_staff:
+        return render(request, 'statuses/401.html')
+
+    discipline = get_object_or_404(Discipline, pk=id)
+
+    if request.method == 'POST':
+        discipline.delete()
+        return redirect('disciplines_list')
+
+    return render(request, 'discipline_delete_confirm.html', {'discipline': discipline})

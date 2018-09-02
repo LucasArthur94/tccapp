@@ -20,13 +20,13 @@
                                 <th>{{ discipline.modality }}</th>
                                 <th>{{ discipline.created_at }}</th>
                                 <th>
-                                    {# <a href="{% url 'disciplines_delete' teacher.pk %}">
+                                    <a href="{% url 'disciplines_delete' discipline.pk %}">
                                         <span class="fas fa-trash-alt"></span>
                                     </a>
                                     |
-                                    <a href="{% url 'disciplines_update' teacher.pk %}">
+                                    <a href="{% url 'disciplines_update' discipline.pk %}">
                                         <span class="fas fa-user-edit"></span>
-                                    </a> #}
+                                    </a>
                                 </th>
                             </tr>
                         {% endfor %}
