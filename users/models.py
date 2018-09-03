@@ -1,5 +1,6 @@
 from django.core.mail import EmailMessage
-from django.template.loader import render_to_string
+from django.template import Context
+from django.template.loader import get_template
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .managers import UserManager
@@ -57,13 +58,15 @@ class Student(models.Model):
         super(Student, self).save(*args, **kwargs)
 
         data = {'name': self.user.name, 'appurl': 'tccapp-next-release.herokuapp.com'}
-        html_email = render_to_string('users/emails/new_user.html', data)
+        html_email = get_template('users/emails/new_user.html', Context(data))
 
         email = EmailMessage(
             subject='Bem-vindo a plataforma de TCC Poli USP',
             body=html_email,
             to=[self.user.email],
         )
+
+        email.content_subtype = 'html'
 
         email.send()
 
@@ -91,13 +94,15 @@ class Teacher(models.Model):
         super(Teacher, self).save(*args, **kwargs)
 
         data = {'name': self.user.name, 'appurl': 'tccapp-next-release.herokuapp.com'}
-        html_email = render_to_string('users/emails/new_user.html', data)
+        html_email = get_template('users/emails/new_user.html', Context(data))
 
         email = EmailMessage(
             subject='Bem-vindo a plataforma de TCC Poli USP',
             body=html_email,
             to=[self.user.email],
         )
+
+        email.content_subtype = 'html'
 
         email.send()
 
@@ -123,13 +128,15 @@ class Guest(models.Model):
         super(Guest, self).save(*args, **kwargs)
 
         data = {'name': self.user.name, 'appurl': 'tccapp-next-release.herokuapp.com'}
-        html_email = render_to_string('users/emails/new_user.html', data)
+        html_email = get_template('users/emails/new_user.html', Context(data))
 
         email = EmailMessage(
             subject='Bem-vindo a plataforma de TCC Poli USP',
             body=html_email,
             to=[self.user.email],
         )
+
+        email.content_subtype = 'html'
 
         email.send()
 
@@ -157,12 +164,14 @@ class Coordinator(models.Model):
         super(Coordinator, self).save(*args, **kwargs)
 
         data = {'name': self.user.name, 'appurl': 'tccapp-next-release.herokuapp.com'}
-        html_email = render_to_string('users/emails/new_user.html', data)
+        html_email = get_template('users/emails/new_user.html', Context(data))
 
         email = EmailMessage(
             subject='Bem-vindo a plataforma de TCC Poli USP',
             body=html_email,
             to=[self.user.email],
         )
+
+        email.content_subtype = 'html'
 
         email.send()
