@@ -56,7 +56,7 @@ class Student(models.Model):
     def save(self, *args, **kwargs):
         super(Student, self).save(*args, **kwargs)
 
-        data = {'name': self.user.name, 'appurl': 'tccapp-next-release.herokuapp.com'}
+        data = {'name': self.user.name, 'appurl': 'https://tccapp-next-release.herokuapp.com'}
         html_email = render_to_string('users/emails/new_user.html', data)
 
         email = EmailMessage(
@@ -92,7 +92,7 @@ class Teacher(models.Model):
     def save(self, *args, **kwargs):
         super(Teacher, self).save(*args, **kwargs)
 
-        data = {'name': self.user.name, 'appurl': 'tccapp-next-release.herokuapp.com'}
+        data = {'name': self.user.name, 'appurl': 'https://tccapp-next-release.herokuapp.com'}
         html_email = render_to_string('users/emails/new_user.html', data)
 
         email = EmailMessage(
@@ -126,7 +126,7 @@ class Guest(models.Model):
     def save(self, *args, **kwargs):
         super(Guest, self).save(*args, **kwargs)
 
-        data = {'name': self.user.name, 'appurl': 'tccapp-next-release.herokuapp.com'}
+        data = {'name': self.user.name, 'appurl': 'https://tccapp-next-release.herokuapp.com'}
         html_email = render_to_string('users/emails/new_user.html', data)
 
         email = EmailMessage(
@@ -162,7 +162,7 @@ class Coordinator(models.Model):
     def save(self, *args, **kwargs):
         super(Coordinator, self).save(*args, **kwargs)
 
-        data = {'name': self.user.name, 'appurl': 'tccapp-next-release.herokuapp.com'}
+        data = {'name': self.user.name, 'appurl': 'https://tccapp-next-release.herokuapp.com'}
         html_email = render_to_string('users/emails/new_user.html', data)
 
         email = EmailMessage(

@@ -1,3 +1,0 @@
-Bem-vindo, {{ name }}, ao sistema de TCC do PCS!
-
-Para efetuar seu primeiro acesso, entre com seu e-mail e seu número USP como senha: {{ appurl }}
