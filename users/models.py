@@ -1,3 +1,7 @@
+import os
+
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .managers import UserManager
@@ -51,6 +55,22 @@ class Student(models.Model):
         auto_now=True
     )
 
+    def save(self, *args, **kwargs):
+        super(Student, self).save(*args, **kwargs)
+
+        data = {'name': self.user.name, 'appurl': os.environ.get('RUNNING_DOMAIN')}
+        plain_text = render_to_string('users/emails/new_user.txt', data)
+        html_email = render_to_string('users/emails/new_user.html', data)
+
+        send_mail(
+            'Bem-vindo a plataforma de TCC Poli USP',
+            plain_text,
+            'tcc@poli.usp.br',
+            [self.user.email],
+            html_message=html_email,
+            fail_silently=False,
+        )
+
 class Teacher(models.Model):
     """specific role model"""
     REQUIRED_FIELDS = ('user', 'usp_number', 'created_at', 'updated_at')
@@ -71,6 +91,22 @@ class Teacher(models.Model):
         auto_now=True
     )
 
+    def save(self, *args, **kwargs):
+        super(Teacher, self).save(*args, **kwargs)
+
+        data = {'name': self.user.name, 'appurl': os.environ.get('RUNNING_DOMAIN')}
+        plain_text = render_to_string('users/emails/new_user.txt', data)
+        html_email = render_to_string('users/emails/new_user.html', data)
+
+        send_mail(
+            'Bem-vindo a plataforma de TCC Poli USP',
+            plain_text,
+            'tcc@poli.usp.br',
+            [self.user.email],
+            html_message=html_email,
+            fail_silently=False,
+        )
+
 
 class Guest(models.Model):
     """specific role model"""
@@ -88,6 +124,22 @@ class Guest(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
+
+    def save(self, *args, **kwargs):
+        super(Guest, self).save(*args, **kwargs)
+
+        data = {'name': self.user.name, 'appurl': os.environ.get('RUNNING_DOMAIN')}
+        plain_text = render_to_string('users/emails/new_user.txt', data)
+        html_email = render_to_string('users/emails/new_user.html', data)
+
+        send_mail(
+            'Bem-vindo a plataforma de TCC Poli USP',
+            plain_text,
+            'tcc@poli.usp.br',
+            [self.user.email],
+            html_message=html_email,
+            fail_silently=False,
+        )
 
 class Coordinator(models.Model):
     """specific role model"""
@@ -108,3 +160,19 @@ class Coordinator(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
+
+    def save(self, *args, **kwargs):
+        super(Coordinator, self).save(*args, **kwargs)
+
+        data = {'name': self.user.name, 'appurl': os.environ.get('RUNNING_DOMAIN')}
+        plain_text = render_to_string('users/emails/new_user.txt', data)
+        html_email = render_to_string('users/emails/new_user.html', data)
+
+        send_mail(
+            'Bem-vindo a plataforma de TCC Poli USP',
+            plain_text,
+            'tcc@poli.usp.br',
+            [self.user.email],
+            html_message=html_email,
+            fail_silently=False,
+        )

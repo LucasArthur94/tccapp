@@ -23,7 +23,7 @@ class DisciplinesForm(ModelForm):
             'start_date': DateInput(),
             'end_date': DateInput(),
             'users': ModelSelect2MultipleWidget(
-                model=User,
+                queryset=User.objects.filter(student__isnull=False),
                 search_fields=['name__icontains', 'email__icontains']
             ),
         }
