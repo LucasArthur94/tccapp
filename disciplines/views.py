@@ -54,27 +54,26 @@ def disciplines_delete(request, id):
 
 @login_required
 def student_bulk_register(request):
-    if request.method == 'POST':
-        student_bulk_register_form = StudentBulkRegisterForm(request.POST or None, request.FILES or None)
+    student_bulk_register_form = StudentBulkRegisterForm(request.POST or None, request.FILES or None)
 
-        if student_bulk_register_form.is_valid():
-            user_resource = UserResource()
-            student_resource = StudentResource()
-            dataset = Dataset()
-            new_students = request.FILES['students_csv']
+    if request.method == 'POST' and student_bulk_register_form.is_valid():
+        user_resource = UserResource()
+        student_resource = StudentResource()
+        dataset = Dataset()
+        new_students = request.FILES['students_csv']
 
-            print(new_students)
+        print(new_students)
 
-            imported_data = dataset.load(new_students.read())
+        imported_data = dataset.load(new_students.read())
 
-            users_result = user_resource.import_data(dataset, dry_run=True)
-            students_result = student_resource.import_data(dataset, dry_run=True)
+        users_result = user_resource.import_data(dataset, dry_run=True)
+        students_result = student_resource.import_data(dataset, dry_run=True)
 
-            if not users_result.has_errors() and not students_result.has_errors():
-                user_resource.import_data(dataset, dry_run=False)
-                student_resource.import_data(dataset, dry_run=False)
+        if not users_result.has_errors() and not students_result.has_errors():
+            user_resource.import_data(dataset, dry_run=False)
+            student_resource.import_data(dataset, dry_run=False)
 
-            disciplines_form = DisciplinesForm(request.POST or None)
-            return render(request, 'discipline_form.html', {'disciplines_form': disciplines_form})
+        disciplines_form = DisciplinesForm(request.POST or None)
+        return render(request, 'discipline_form.html', {'disciplines_form': disciplines_form})
 
     return render(request, 'student_bulk_register_form.html', {'student_bulk_register_form': student_bulk_register_form})
