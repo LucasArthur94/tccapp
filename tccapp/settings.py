@@ -147,6 +147,8 @@ LOGIN_URL = '/login/'
 
 LOGIN_REDIRECT_URL = 'teachers_list'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 EMAIL_HOST = config('EMAIL_HOST', default='localhost')
 
 EMAIL_PORT = config('EMAIL_PORT', default=1025, cast=int)

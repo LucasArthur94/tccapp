@@ -10,6 +10,7 @@ django-heroku==0.3.1
 django-import-export==1.0.1
 django-jet==1.0.7
 django-select2==6.3.1
+django-smtp-ssl==1.0
 et-xmlfile==1.0.1
 feedparser==5.2.1
 jdcal==1.4
