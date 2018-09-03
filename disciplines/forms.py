@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.forms import Form, FileField, ModelForm, DateInput
 from users.models import User
 from .models import  Discipline
@@ -29,4 +30,8 @@ class DisciplinesForm(ModelForm):
 
 
 class StudentBulkRegisterForm(Form):
-    students_csv = FileField(label='Arquivo com as informações dos alunos: ')
+    def validate_file_extension(value):
+        if not value.name.endswith('.csv'):
+            raise ValidationError(u'Insira um arquivo com extensão .csv')
+
+    students_csv = FileField(validators=[validate_file_extension])

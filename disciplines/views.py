@@ -55,22 +55,26 @@ def disciplines_delete(request, id):
 @login_required
 def student_bulk_register(request):
     if request.method == 'POST':
-        user_resource = UserResource()
-        student_resource = StudentResource()
-        dataset = Dataset()
-        new_students = request.FILES['students_csv']
+        student_bulk_register_form = StudentBulkRegisterForm(request.POST or None, request.FILES or None)
 
-        imported_data = dataset.load(new_students.read())
+        if student_bulk_register_form.is_valid():
+            user_resource = UserResource()
+            student_resource = StudentResource()
+            dataset = Dataset()
+            new_students = request.FILES['students_csv']
 
-        users_result = user_resource.import_data(dataset, dry_run=True)
-        students_result = student_resource.import_data(dataset, dry_run=True)
+            print(new_students)
 
-        if not users_result.has_errors() and not students_result.has_errors():
-            user_resource.import_data(dataset, dry_run=False)
-            student_resource.import_data(dataset, dry_run=False)
+            imported_data = dataset.load(new_students.read())
 
-        disciplines_form = DisciplinesForm(request.POST or None)
-        return render(request, 'discipline_form.html', {'disciplines_form': disciplines_form})
+            users_result = user_resource.import_data(dataset, dry_run=True)
+            students_result = student_resource.import_data(dataset, dry_run=True)
 
-    student_bulk_register_form = StudentBulkRegisterForm(request.POST or None)
+            if not users_result.has_errors() and not students_result.has_errors():
+                user_resource.import_data(dataset, dry_run=False)
+                student_resource.import_data(dataset, dry_run=False)
+
+            disciplines_form = DisciplinesForm(request.POST or None)
+            return render(request, 'discipline_form.html', {'disciplines_form': disciplines_form})
+
     return render(request, 'student_bulk_register_form.html', {'student_bulk_register_form': student_bulk_register_form})

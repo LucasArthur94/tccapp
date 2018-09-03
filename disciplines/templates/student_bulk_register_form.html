@@ -2,9 +2,12 @@
 {% load bootstrap %}
 
 {% block main %}
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ student_bulk_register_form|bootstrap }}
-        <button type="submit">Cadastrar</button>
-    </form>
+    <div class='col-md-12'>
+        <h3 class='text-center'>Cadastrar alunos em lote</h3>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ student_bulk_register_form|bootstrap_inline }}
+            <button type="submit" class="btn btn-primary float-right">Cadastrar</button>
+        </form>
+    </div>
 {% endblock %}
