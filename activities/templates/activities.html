@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">Listagem de Atividades da Disciplina</h3>
+            {% if activities|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Peso</th>
+                                <th scope="col">Data Limite</th>
+                                <th scope="col">Nome do Arquivo Principal</th>
+                                <th scope="col">Nome do Arquivo Extra</th>
+                                <th scope="col">Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for activity in activities %}
+                            <tr>
+                                <th>{{ activity.name }}</th>
+                                <th>{{ activity.weight }}</th>
+                                <th>{{ activity.due_date }}</th>
+                                <th>
+                                    {{ activity.main_file_name }}
+                                    {% if activity.main_file_required %}
+                                        <span class="badge badge-danger">Obrigatório</span>
+                                    {% elif not activity.main_file_required %}
+                                        <span class="badge badge-success">Opcional</span>
+                                    {% endif %}
+                                </th>
+                                <th>
+                                    {{ activity.side_file_name }}
+                                    {% if activity.side_file_required %}
+                                        <span class="badge badge-danger">Obrigatório</span>
+                                    {% elif not activity.side_file_required %}
+                                        <span class="badge badge-success">Opcional</span>
+                                    {% endif %}
+                                </th>
+                                <th>
+                                    <a title="Apagar" href="{% url 'activities_delete' discipline_id activity.pk %}">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </a>
+                                    |
+                                    <a title="Editar" href="{% url 'activities_update' discipline_id activity.pk %}">
+                                        <span class="fas fa-user-edit"></span>
+                                    </a>
+                                </th>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <br />
+                <h2 class='text-center'>Sem atividades cadastradas nesta disciplina!</h2>
+            {% endif %}
+            <a href="{% url 'activities_new' discipline_id %}" class="btn btn-primary float-right"> Nova Atividade da Disciplina</a>
+            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'disciplines_list' %}" role="button">
+                Voltar
+            </a>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+{% endblock %}

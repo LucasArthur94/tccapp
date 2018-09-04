@@ -22,11 +22,11 @@
                                 <th>{{ teacher.user.email }}</th>
                                 <th>{{ teacher.usp_number }}</th>
                                 <th>
-                                    <a href="{% url 'teachers_delete' teacher.pk %}">
+                                    <a title="Apagar" href="{% url 'teachers_delete' teacher.pk %}">
                                         <span class="fas fa-trash-alt"></span>
                                     </a>
                                     |
-                                    <a href="{% url 'teachers_update' teacher.pk %}">
+                                    <a title="Editar" href="{% url 'teachers_update' teacher.pk %}">
                                         <span class="fas fa-user-edit"></span>
                                     </a>
                                 </th>

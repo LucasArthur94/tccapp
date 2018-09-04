@@ -18,15 +18,17 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from users import urls as users_urls
 from disciplines import urls as disciplines_urls
+from activities import urls as activities_urls
 from home import urls as home_urls
 from django_select2 import urls as django_select2_urls
 
 urlpatterns = [
     # path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
-    # path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
+    # path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('', include(home_urls)),
     path('users/', include(users_urls), name='users'),
     path('disciplines/', include(disciplines_urls), name='disciplines'),
+    path('activities/<int:discipline_id>/', include(activities_urls), name='activities'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('admin/', admin.site.urls),
     path('select2/', include(django_select2_urls)),

@@ -10,6 +10,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Modalidade</th>
+                                <th scope="col">Quantidade de Atividades</th>
                                 <th scope="col">Data de Início</th>
                                 <th scope="col">Data de Término</th>
                                 <th scope="col">Opções</th>
@@ -27,14 +28,19 @@
                                         {{ discipline.modality }}
                                     {% endif %}
                                 </th>
+                                <th>{{ discipline.activity_set.count }}</th>
                                 <th>{{ discipline.start_date }}</th>
                                 <th>{{ discipline.end_date }}</th>
                                 <th>
-                                    <a href="{% url 'disciplines_delete' discipline.pk %}">
+                                    <a title="Gerenciar Atividades" href="{% url 'activities_list' discipline.pk %}">
+                                        <span class="fas fa-list-ul"></span>
+                                    </a>
+                                    |
+                                    <a title="Apagar" href="{% url 'disciplines_delete' discipline.pk %}">
                                         <span class="fas fa-trash-alt"></span>
                                     </a>
                                     |
-                                    <a href="{% url 'disciplines_update' discipline.pk %}">
+                                    <a title="Editar" href="{% url 'disciplines_update' discipline.pk %}">
                                         <span class="fas fa-user-edit"></span>
                                     </a>
                                 </th>
