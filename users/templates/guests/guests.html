@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">Listagem de Convidados Externos</h3>
+            {% if guests|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Empresa</th>
+                                <th scope="col">Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for guest in guests %}
+                            <tr>
+                                <th>{{ guest.user.name }}</th>
+                                <th>{{ guest.user.email }}</th>
+                                <th>{{ guest.organization_name }}</th>
+                                <th>
+                                    <a title="Apagar" href="{% url 'guests_delete' guest.pk %}">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </a>
+                                    |
+                                    <a title="Editar" href="{% url 'guests_update' guest.pk %}">
+                                        <span class="fas fa-user-edit"></span>
+                                    </a>
+                                </th>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <br />
+                <h2 class='text-center'>Sem convidados externos cadastrados!</h2>
+            {% endif %}
+            <a href="{% url 'guests_new' %}" class="btn btn-primary float-right"> Novo Convidado Externo</a>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+{% endblock %}

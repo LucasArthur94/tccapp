@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">Listagem de Alunos</h3>
+            {% if students|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Nº USP</th>
+                                <th scope="col">Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for student in students %}
+                            <tr>
+                                <th>{{ student.user.name }}</th>
+                                <th>{{ student.user.email }}</th>
+                                <th>{{ student.usp_number }}</th>
+                                <th>
+                                    <a title="Apagar" href="{% url 'students_delete' student.pk %}">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </a>
+                                    |
+                                    <a title="Editar" href="{% url 'students_update' student.pk %}">
+                                        <span class="fas fa-user-edit"></span>
+                                    </a>
+                                </th>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <br />
+                <h2 class='text-center'>Sem alunos cadastrados!</h2>
+            {% endif %}
+            <a href="{% url 'students_new' %}" class="btn btn-primary float-right"> Novo Aluno</a>
+            <a class="btn btn-secondary float-right" href="{% url 'students_new_bulk' %}" role="button">
+                Cadastrar alunos massivamente
+            </a>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+{% endblock %}
