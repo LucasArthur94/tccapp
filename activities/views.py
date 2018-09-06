@@ -10,7 +10,7 @@ def activities_list(request, discipline_id):
 
 @login_required
 def activities_new(request, discipline_id):
-    if not request.user.is_staff:
+    if not request.user.is_superuser:
         return render(request, 'statuses/401.html')
 
     activities_form = ActivitiesForm(request.POST or None)
@@ -25,7 +25,7 @@ def activities_new(request, discipline_id):
 
 @login_required
 def activities_update(request, discipline_id, id):
-    if not request.user.is_staff:
+    if not request.user.is_superuser:
         return render(request, 'statuses/401.html')
 
     activity = get_object_or_404(Activity, pk=id)
@@ -39,7 +39,7 @@ def activities_update(request, discipline_id, id):
 
 @login_required
 def activities_delete(request, discipline_id, id):
-    if not request.user.is_staff:
+    if not request.user.is_superuser:
         return render(request, 'statuses/401.html')
 
     activity = get_object_or_404(Activity, pk=id)

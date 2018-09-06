@@ -9,7 +9,7 @@ class Discipline(models.Model):
     QUARTELY = 'QDR'
 
     MODALITY_CHOICES = (
-        (SEMESTER, 'Semetral'),
+        (SEMESTER, 'Semestral'),
         (QUARTELY, 'Quadrimestral'),
     )
 

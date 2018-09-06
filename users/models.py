@@ -22,15 +22,7 @@ class User(AbstractUser):
 
 class Student(models.Model):
     """specific role model"""
-    SEMESTER = 'SMS'
-    QUARTELY = 'QDR'
-
-    MODALITY_CHOICES = (
-        (SEMESTER, 'Semester'),
-        (QUARTELY, 'Quartely'),
-    )
-
-    REQUIRED_FIELDS = ('user', 'usp_number', 'modality', 'created_at', 'updated_at')
+    REQUIRED_FIELDS = ('user', 'usp_number', 'created_at', 'updated_at')
 
     user = models.OneToOneField(
         User,
@@ -40,11 +32,6 @@ class Student(models.Model):
     usp_number = models.IntegerField(
         unique=True,
         db_index=True
-    )
-    modality = models.CharField(
-        max_length=3,
-        choices=MODALITY_CHOICES,
-        default=QUARTELY
     )
     created_at = models.DateTimeField(
         auto_now_add=True
