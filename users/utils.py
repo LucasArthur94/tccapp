@@ -12,13 +12,14 @@ def xls_jupiter_parser(new_students_xls):
         student_info = students_spreadsheet.row_slice(rowx=row, start_colx=0, end_colx=5)
 
         usp_number = student_info[0].value
+        email = student_info[4].value
 
-        if not '(P) ' in usp_number and not '(I) ' in usp_number:
+        if email and not '(P) ' in usp_number and not '(I) ' in usp_number:
             user_dict = {}
 
+            user_dict['email'] = email
+            user_dict['username'] = email
             user_dict['name'] = student_info[3].value
-            user_dict['email'] = student_info[4].value
-            user_dict['username'] = student_info[4].value
             users_form = UsersForm(user_dict)
 
             student_dict = {}

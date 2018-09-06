@@ -9,14 +9,16 @@
   </button>
 
   <div class="collapse navbar-collapse" id="menuNav">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item {% active_link 'disciplines_list' %}">
-        <a class="nav-link" href="{% url 'disciplines_list' %}">Disciplinas</a>
-      </li>
-      <li class="nav-item {% active_link 'teachers_list' %}">
-        <a class="nav-link" href="{% url 'teachers_list' %}">Docentes</a>
-      </li>
-    </ul>
+    {% if request.user.is_superuser %}
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item {% active_link 'disciplines_list' %}">
+          <a class="nav-link" href="{% url 'disciplines_list' %}">Disciplinas</a>
+        </li>
+        <li class="nav-item {% active_link 'teachers_list' %}">
+          <a class="nav-link" href="{% url 'teachers_list' %}">Docentes</a>
+        </li>
+      </ul>
+    {% endif %}
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         {% if user.is_authenticated %}
