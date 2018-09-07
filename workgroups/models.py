@@ -27,27 +27,3 @@ class Workgroup(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
-
-    def save(self, *args, **kwargs):
-        super(Workgroup, self).save(*args, **kwargs)
-
-        data = {'appurl': 'https://tccapp-next-release.herokuapp.com/workgroups'}
-        html_email = render_to_string('emails/new_workgroup.html', data)
-
-        destination_emails = [self.advisor.email]
-
-        for student in self.students.all():
-            destination_emails.append(student.email)
-
-        if self.guest:
-            destination_emails.append(self.guest.email)
-
-        email = EmailMessage(
-            subject='Você foi cadastrado em um grupo de projeto de formatura!',
-            body=html_email,
-            to=destination_emails,
-        )
-
-        email.content_subtype = 'html'
-
-        email.send()

@@ -2,6 +2,8 @@ import xlrd
 
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 from users.forms import UsersForm, StudentsForm
 
 def xls_jupiter_parser(new_students_xls):
@@ -36,4 +38,20 @@ def xls_jupiter_parser(new_students_xls):
                 recent_student.user = recent_user
                 recent_student.save()
 
+                send_welcome_mail(recent_user)
+
     default_storage.delete('new_students.xls')
+
+def send_welcome_mail(user):
+    data = {'name': user.name, 'appurl': 'https://tccapp-next-release.herokuapp.com'}
+    html_email = render_to_string('users/emails/new_user.html', data)
+
+    email = EmailMessage(
+        subject='Bem-vindo a plataforma de TCC Poli USP',
+        body=html_email,
+        to=[user.email],
+    )
+
+    email.content_subtype = 'html'
+
+    email.send()

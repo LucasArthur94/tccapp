@@ -1,5 +1,3 @@
-from django.core.mail import EmailMessage
-from django.template.loader import render_to_string
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .managers import UserManager
@@ -40,22 +38,6 @@ class Student(models.Model):
         auto_now=True
     )
 
-    def save(self, *args, **kwargs):
-        super(Student, self).save(*args, **kwargs)
-
-        data = {'name': self.user.name, 'appurl': 'https://tccapp-next-release.herokuapp.com'}
-        html_email = render_to_string('users/emails/new_user.html', data)
-
-        email = EmailMessage(
-            subject='Bem-vindo a plataforma de TCC Poli USP',
-            body=html_email,
-            to=[self.user.email],
-        )
-
-        email.content_subtype = 'html'
-
-        email.send()
-
 class Teacher(models.Model):
     """specific role model"""
     REQUIRED_FIELDS = ('user', 'usp_number', 'created_at', 'updated_at')
@@ -76,22 +58,6 @@ class Teacher(models.Model):
         auto_now=True
     )
 
-    def save(self, *args, **kwargs):
-        super(Teacher, self).save(*args, **kwargs)
-
-        data = {'name': self.user.name, 'appurl': 'https://tccapp-next-release.herokuapp.com'}
-        html_email = render_to_string('users/emails/new_user.html', data)
-
-        email = EmailMessage(
-            subject='Bem-vindo a plataforma de TCC Poli USP',
-            body=html_email,
-            to=[self.user.email],
-        )
-
-        email.content_subtype = 'html'
-
-        email.send()
-
 
 class Guest(models.Model):
     """specific role model"""
@@ -109,22 +75,6 @@ class Guest(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
-
-    def save(self, *args, **kwargs):
-        super(Guest, self).save(*args, **kwargs)
-
-        data = {'name': self.user.name, 'appurl': 'https://tccapp-next-release.herokuapp.com'}
-        html_email = render_to_string('users/emails/new_user.html', data)
-
-        email = EmailMessage(
-            subject='Bem-vindo a plataforma de TCC Poli USP',
-            body=html_email,
-            to=[self.user.email],
-        )
-
-        email.content_subtype = 'html'
-
-        email.send()
 
 class Coordinator(models.Model):
     """specific role model"""
@@ -146,18 +96,3 @@ class Coordinator(models.Model):
         auto_now=True
     )
 
-    def save(self, *args, **kwargs):
-        super(Coordinator, self).save(*args, **kwargs)
-
-        data = {'name': self.user.name, 'appurl': 'https://tccapp-next-release.herokuapp.com'}
-        html_email = render_to_string('users/emails/new_user.html', data)
-
-        email = EmailMessage(
-            subject='Bem-vindo a plataforma de TCC Poli USP',
-            body=html_email,
-            to=[self.user.email],
-        )
-
-        email.content_subtype = 'html'
-
-        email.send()

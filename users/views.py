@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import  User, Student, Teacher, Guest, Coordinator
 from .forms import  UsersForm, StudentsForm, TeachersForm, GuestsForm, CoordinatorsForm, StudentBulkRegisterForm
-from .utils import xls_jupiter_parser
+from .utils import xls_jupiter_parser, send_welcome_mail
 
 # Teacher views
 
@@ -30,6 +30,8 @@ def teachers_new(request):
 
         new_teacher.user_id = new_user.pk
         new_teacher.save()
+
+        send_welcome_mail(new_user)
 
         return redirect('teachers_list')
     return render(request, 'teachers/teacher_form.html', {'users_form': users_form, 'teachers_form': teachers_form})
@@ -92,6 +94,8 @@ def students_new(request):
 
         new_student.user_id = new_user.pk
         new_student.save()
+
+        send_welcome_mail(new_user)
 
         return redirect('students_list')
     return render(request, 'students/student_form.html', {'users_form': users_form, 'students_form': students_form})
@@ -169,6 +173,8 @@ def guests_new(request):
 
         new_guest.user_id = new_user.pk
         new_guest.save()
+
+        send_welcome_mail(new_user)
 
         return redirect('guests_list')
     return render(request, 'guests/guest_form.html', {'users_form': users_form, 'guests_form': guests_form})

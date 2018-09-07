@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import  Workgroup
 from .forms import  WorkgroupsForm
+from .utils import send_new_workgroup_mail
 
 # Create your views here.
 
@@ -22,7 +23,8 @@ def workgroups_new(request):
     workgroups_form = WorkgroupsForm(request.POST or None)
 
     if workgroups_form.is_valid():
-        workgroups_form.save()
+        workgroup = workgroups_form.save()
+        send_new_workgroup_mail(workgroup)
 
         return redirect('workgroups_list')
     return render(request, 'workgroup_form.html', {'workgroups_form': workgroups_form})
