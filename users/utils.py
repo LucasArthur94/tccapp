@@ -6,6 +6,20 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from users.forms import UsersForm, StudentsForm
 
+def send_welcome_mail(user):
+    data = {'name': user.name, 'appurl': 'https://tccapp-next-release.herokuapp.com'}
+    html_email = render_to_string('users/emails/new_user.html', data)
+
+    email = EmailMessage(
+        subject='Bem-vindo a plataforma de TCC Poli USP',
+        body=html_email,
+        to=[user.email],
+    )
+
+    email.content_subtype = 'html'
+
+    email.send()
+
 def xls_jupiter_parser(new_students_xls):
     xls_path = default_storage.save('new_students.xls', ContentFile(new_students_xls.read()))
     spreadsheets = xlrd.open_workbook(xls_path)
@@ -41,17 +55,3 @@ def xls_jupiter_parser(new_students_xls):
                 send_welcome_mail(recent_user)
 
     default_storage.delete('new_students.xls')
-
-def send_welcome_mail(user):
-    data = {'name': user.name, 'appurl': 'https://tccapp-next-release.herokuapp.com'}
-    html_email = render_to_string('users/emails/new_user.html', data)
-
-    email = EmailMessage(
-        subject='Bem-vindo a plataforma de TCC Poli USP',
-        body=html_email,
-        to=[user.email],
-    )
-
-    email.content_subtype = 'html'
-
-    email.send()
