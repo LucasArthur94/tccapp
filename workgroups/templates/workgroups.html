@@ -30,8 +30,17 @@
                                     {% endif %}
                                 </th>
                                 <th>
-                                    {% if user == workgroup.advisor or user == workgroup.guest %}
+                                    {% if user == workgroup.advisor %}
                                         {% if not workgroup.advisor_validated_participation %}
+                                            <a title="Confirmar Participação" href="{% url 'workgroups_confirm_participation' workgroup.pk %}">
+                                                <span class="badge badge-danger">Confirmar Participação</span>
+                                            </a>
+                                        {% else %}
+                                            <span class="badge badge-success">Participação Confirmada</span>
+                                        {% endif %}
+                                        |
+                                    {% elif user == workgroup.guest %}
+                                        {% if not workgroup.guest_validated_participation %}
                                             <a title="Confirmar Participação" href="{% url 'workgroups_confirm_participation' workgroup.pk %}">
                                                 <span class="badge badge-danger">Confirmar Participação</span>
                                             </a>

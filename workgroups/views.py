@@ -58,13 +58,18 @@ def workgroups_delete(request, id):
 
 @login_required
 def workgroups_confirm_participation(request, id):
-    if not request.user.is_superuser:
-        return render(request, 'statuses/401.html')
-
     workgroup = get_object_or_404(Workgroup, pk=id)
 
+    if not request.user == workgroup.advisor and not request.user == workgroup.guest:
+        return render(request, 'statuses/401.html')
+
     if request.method == 'POST':
-        workgroup.delete()
+        if request.user == workgroup.advisor:
+            workgroup.advisor_validated_participation = True
+            workgroup.save()
+        elif request.user == workgroup.guest:
+            workgroup.guest_validated_participation = True
+            workgroup.save()
         return redirect('workgroups_list')
 
     return render(request, 'workgroup_confirm_participation.html', {'workgroup': workgroup})
