@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block main %}
+    <div class='col-md-12'>
+        <h3 class='text-center'>Informações</h3>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ workgroups_form|bootstrap }}
+            <button type="submit" class="btn btn-primary float-right">Salvar</button>
+            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'workgroups_list' %}" role="button">
+                Voltar
+            </a>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+{% endblock %}

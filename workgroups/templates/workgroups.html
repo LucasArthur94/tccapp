@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">Listagem de Grupos de Trabalho</h3>
+            {% if workgroups|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Título</th>
+                                <th scope="col">Quantidade de Alunos</th>
+                                <th scope="col">Orientador</th>
+                                <th scope="col">Co-orientador</th>
+                                <th scope="col">Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for workgroup in workgroups %}
+                            <tr>
+                                <th>{{ workgroup.title }}</th>
+                                <th>{{ workgroup.students.count }}</th>
+                                <th>{{ workgroup.advisor }}</th>
+                                <th>
+                                    {% if workgroup.guest %}
+                                        {{ workgroup.guest }}
+                                    {% else %}
+                                        Não há
+                                    {% endif %}
+                                </th>
+                                <th>
+                                    {% if user == workgroup.advisor or user == workgroup.guest %}
+                                        {% if not workgroup.advisor_validated_participation %}
+                                            <a title="Confirmar Participação" href="{% url 'workgroups_confirm_participation' workgroup.pk %}">
+                                                <span class="badge badge-danger">Confirmar Participação</span>
+                                            </a>
+                                        {% else %}
+                                            <span class="badge badge-success">Participação Confirmada</span>
+                                        {% endif %}
+                                        |
+                                    {% endif %}
+                                    <a title="Apagar" href="{% url 'workgroups_delete' workgroup.pk %}">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </a>
+                                    |
+                                    <a title="Editar" href="{% url 'workgroups_update' workgroup.pk %}">
+                                        <span class="fas fa-user-edit"></span>
+                                    </a>
+                                </th>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <br />
+                <h2 class='text-center'>Sem grupos de trabalho cadastradas!</h2>
+            {% endif %}
+            <a href="{% url 'workgroups_new' %}" class="btn btn-primary float-right"> Novo Grupo de Trabalho</a>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+{% endblock %}
