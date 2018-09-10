@@ -4,7 +4,6 @@ from disciplines.models import Discipline
 # Create your models here.
 
 class Activity(models.Model):
-    # Role variables
     REQUIRED_FIELDS = ('name', 'weight', 'due_date', 'main_file_name', 'side_file_name', 'main_file_required', 'side_file_required', 'created_at', 'updated_at')
 
     name = models.CharField(
@@ -14,10 +13,6 @@ class Activity(models.Model):
         default=1,
     )
     due_date = models.DateField()
-    main_file_name = models.CharField(
-        max_length=100,
-        default='Documento Principal',
-    )
     main_file_name = models.CharField(
         max_length=100,
         default='Documento Principal',

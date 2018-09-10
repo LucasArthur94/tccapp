@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'gdstorage',
     'import_export',
     'bootstrapform',
     'django_select2',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     'disciplines',
     'activities',
     'workgroups',
+    'deliveries',
 ]
 
 MIDDLEWARE = [
@@ -144,6 +146,8 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'staticfiles/gdrive.json'
 
 LOGIN_URL = '/login/'
 

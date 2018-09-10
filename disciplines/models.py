@@ -4,7 +4,6 @@ from users.models import User
 # Create your models here.
 
 class Discipline(models.Model):
-    # Role variables
     SEMESTER = 'SMS'
     QUARTELY = 'QDR'
 

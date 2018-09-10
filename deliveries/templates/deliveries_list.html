@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">Listagem de Atividades da Disciplina</h3>
+            {% if activities|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Data de Submissão</th>
+                                <th scope="col">Arquivo Principal</th>
+                                <th scope="col">Arquivo Secundário</th>
+                                <th scope="col">Status de Avaliação</th>
+                                <th scope="col">Nota</th>
+                                <th scope="col">Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for delivery in deliveries %}
+                            <tr>
+                                <th>{{ delivery.submission_date }}</th>
+                                <th>
+                                    {% if delivery.main_file %}
+                                        <span class="badge badge-success">Presente</span>
+                                    {% else %}
+                                        <span class="badge badge-warning">Ausente</span>
+                                    {% endif %}
+                                </th>
+                                <th>
+                                    {% if delivery.side_file %}
+                                        <span class="badge badge-success">Presente</span>
+                                    {% else %}
+                                        <span class="badge badge-warning">Ausente</span>
+                                    {% endif %}
+                                </th>
+                                <th>
+                                    {% if delivery.status == 'AAD' %}
+                                        <span class="badge badge-success">Avaliado pelo Orientador</span>
+                                    {% elif delivery.status == 'AGS' %}
+                                        <span class="badge badge-warning">Avaliado pelo Co-orientador</span>
+                                    {% else %}
+                                        <span class="badge badge-warning">Não Avaliado</span>
+                                    {% endif %}
+                                </th>
+                                <th>{{ delivery.score }}</th>
+                                <th>
+                                    Opções
+                                </th>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <br />
+                <h2 class='text-center'>Sem entregas dessa atividade!</h2>
+            {% endif %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+{% endblock %}
