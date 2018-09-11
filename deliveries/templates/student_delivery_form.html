@@ -8,7 +8,7 @@
             {% csrf_token %}
             {{ students_deliveries_form|bootstrap }}
             <button type="submit" class="btn btn-primary float-right">Salvar</button>
-            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'deliveries_list_by_workgroup' activity_id workgroup_id %}" role="button">
+            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'activities_list' activity.pk %}" role="button">
                 Voltar
             </a>
             <div class="clearfix"></div>

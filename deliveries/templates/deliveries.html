@@ -3,7 +3,7 @@
 {% block main %}
     <div class="row">
         <div class="col-md-12">
-            <h3 class="text-center">Listagem de Atividades da Disciplina</h3>
+            <h3 class="text-center">Listagem de Entregas da Atividade</h3>
             {% if deliveries|length > 0 %}
                 <div class="table-responsive">
                     <table class="table">
@@ -41,10 +41,16 @@
                                     {% elif delivery.status == 'AGS' %}
                                         <span class="badge badge-warning">Avaliado pelo Co-orientador</span>
                                     {% else %}
-                                        <span class="badge badge-warning">Não Avaliado</span>
+                                        <span class="badge badge-danger">Não Avaliado</span>
                                     {% endif %}
                                 </th>
-                                <th>{{ delivery.score }}</th>
+                                <th>
+                                    {% if delivery.status == 'NAV' %}
+                                        Não Avaliado
+                                    {% else %}
+                                        {{ delivery.score }}
+                                    {% endif %}
+                                </th>
                                 <th>
                                     Opções
                                 </th>
@@ -57,6 +63,12 @@
                 <br />
                 <h2 class='text-center'>Sem entregas dessa atividade!</h2>
             {% endif %}
+            {% if not activity.is_closed %}
+                <a href="{% url 'deliveries_new' activity.pk %}" class="btn btn-primary float-right"> Nova Submissão</a>
+            {% endif %}
+            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'home' %}" role="button">
+                Voltar
+            </a>
             <div class="clearfix"></div>
         </div>
     </div>

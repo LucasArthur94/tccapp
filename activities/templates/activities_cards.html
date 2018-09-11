@@ -1,0 +1,21 @@
+<br />
+{% for activity in activities %}
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header primary-color lighten-1 white-text">{{ activity.name }}</div>
+            <div class="card-body">
+                Data Limite: <strong>{{ activity.due_date }}</strong>
+                <br />
+                <br />
+                <div class="btn-group float-right" role="group" aria-label="Activity home operations">
+                    {% if not activity.is_closed %}
+                        <a href="{% url 'students_deliveries_new' activity.id %}" class="btn btn-default btn-sm"> <strong>Realizar Entrega</strong></a>
+                        <br />
+                    {% endif %}
+                    <a href="{% url 'deliveries_list_workgroup' activity.id %}" class="btn btn-warning btn-sm"> <strong>Ver Entregas</strong></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
