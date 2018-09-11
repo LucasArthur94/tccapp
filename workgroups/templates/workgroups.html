@@ -21,10 +21,10 @@
                             <tr>
                                 <th>{{ workgroup.title }}</th>
                                 <th>{{ workgroup.students.count }}</th>
-                                <th>{{ workgroup.advisor }}</th>
+                                <th>{{ workgroup.advisor.name }}</th>
                                 <th>
                                     {% if workgroup.guest %}
-                                        {{ workgroup.guest }}
+                                        {{ workgroup.guest.name }}
                                     {% else %}
                                         Não há
                                     {% endif %}
@@ -49,12 +49,18 @@
                                         {% endif %}
                                         |
                                     {% endif %}
-                                    <a title="Apagar" href="{% url 'workgroups_delete' workgroup.pk %}">
-                                        <span class="fas fa-trash-alt"></span>
+                                    <a title="Ver mais" href="{% url 'workgroups_show' workgroup.pk %}">
+                                        <span class="fas fa-eye"></span>
                                     </a>
                                     |
-                                    <a title="Editar" href="{% url 'workgroups_update' workgroup.pk %}">
-                                        <span class="fas fa-user-edit"></span>
+                                    {% if user.is_superuser %}
+                                        <a title="Editar" href="{% url 'workgroups_update' workgroup.pk %}">
+                                            <span class="fas fa-user-edit"></span>
+                                        </a>
+                                        |
+                                    {% endif %}
+                                    <a title="Apagar" href="{% url 'workgroups_delete' workgroup.pk %}">
+                                        <span class="fas fa-trash-alt"></span>
                                     </a>
                                 </th>
                             </tr>

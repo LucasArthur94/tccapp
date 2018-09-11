@@ -32,16 +32,20 @@
                                 <th>{{ discipline.start_date }}</th>
                                 <th>{{ discipline.end_date }}</th>
                                 <th>
+                                    <a title="Ver mais" href="{% url 'disciplines_show' discipline.pk %}">
+                                        <span class="fas fa-eye"></span>
+                                    </a>
+                                    |
                                     <a title="Gerenciar Atividades" href="{% url 'activities_list' discipline.pk %}">
                                         <span class="fas fa-list-ul"></span>
                                     </a>
                                     |
-                                    <a title="Apagar" href="{% url 'disciplines_delete' discipline.pk %}">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
-                                    |
                                     <a title="Editar" href="{% url 'disciplines_update' discipline.pk %}">
                                         <span class="fas fa-user-edit"></span>
+                                    </a>
+                                    |
+                                    <a title="Apagar" href="{% url 'disciplines_delete' discipline.pk %}">
+                                        <span class="fas fa-trash-alt"></span>
                                     </a>
                                 </th>
                             </tr>

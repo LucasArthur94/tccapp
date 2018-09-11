@@ -22,12 +22,16 @@
                                 <th>{{ guest.user.email }}</th>
                                 <th>{{ guest.organization_name }}</th>
                                 <th>
-                                    <a title="Apagar" href="{% url 'guests_delete' guest.pk %}">
-                                        <span class="fas fa-trash-alt"></span>
+                                    <a title="Ver mais" href="{% url 'guests_show' guest.pk %}">
+                                        <span class="fas fa-eye"></span>
                                     </a>
                                     |
                                     <a title="Editar" href="{% url 'guests_update' guest.pk %}">
                                         <span class="fas fa-user-edit"></span>
+                                    </a>
+                                    |
+                                    <a title="Apagar" href="{% url 'guests_delete' guest.pk %}">
+                                        <span class="fas fa-trash-alt"></span>
                                     </a>
                                 </th>
                             </tr>

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="text-center">Informações do Grupo</h3>
+            <br />
+            <div class="card">
+                <div class="card-header primary-color lighten-1 white-text">Tema do Trabalho: {{ workgroup.title }}</div>
+                <div class="card-body">
+                    Alunos:
+                        <ul>
+                            {% for student in workgroup.students.all %}
+                                <li><strong>{{ student.name }}</strong></li>
+                            {% endfor %}
+                        </ul>
+                    Orientador: <strong>{{ workgroup.advisor.name }}</strong>
+                    <br />
+                    Co-orientador:
+                        {% if workgroup.guest %}
+                            <strong>{{ workgroup.guest.name }}</strong>
+                        {% else %}
+                            <strong>Não há</strong>
+                        {% endif %}
+                    <br />
+                    Participação do Orientador:
+                        {% if not workgroup.advisor_validated_participation %}
+                            <strong>Não Confirmada</strong>
+                        {% else %}
+                            <strong>Confirmada</strong>
+                        {% endif %}
+                    <br />
+                    Participação do Co-orientador:
+                        {% if not workgroup.guest_validated_participation %}
+                            <strong>Não Confirmada</strong>
+                        {% else %}
+                            <strong>Confirmada</strong>
+                        {% endif %}
+                </div>
+            </div>
+            <br />
+            <a class="btn btn-primary btn-block waves-effect" href="{% url 'workgroups_list' %}" role="button">
+                Voltar
+            </a>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+
+{% endblock %}

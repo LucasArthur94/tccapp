@@ -30,6 +30,16 @@ def workgroups_new(request):
     return render(request, 'workgroup_form.html', {'workgroups_form': workgroups_form})
 
 @login_required
+def workgroups_show(request, id):
+    workgroup = get_object_or_404(Workgroup, pk=id)
+
+    if not request.user.is_superuser and not request.user in workgroup.students.all():
+        return render(request, 'statuses/401.html')
+
+
+    return render(request, 'workgroup_show.html', {'workgroup': workgroup})
+
+@login_required
 def workgroups_update(request, id):
     if not request.user.is_superuser:
         return render(request, 'statuses/401.html')

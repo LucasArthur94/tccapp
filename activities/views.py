@@ -24,6 +24,12 @@ def activities_new(request, discipline_id):
     return render(request, 'activity_form.html', {'activities_form': activities_form, 'discipline_id': discipline_id})
 
 @login_required
+def activities_show(request, discipline_id, id):
+    activity = get_object_or_404(Activity, pk=id)
+
+    return render(request, 'activity_show.html', {'activity': activity, 'discipline_id': discipline_id})
+
+@login_required
 def activities_update(request, discipline_id, id):
     if not request.user.is_superuser:
         return render(request, 'statuses/401.html')

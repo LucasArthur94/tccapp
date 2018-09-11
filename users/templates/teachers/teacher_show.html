@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="text-center">Informações do Docente</h3>
+            <br />
+            <div class="card">
+                <div class="card-header primary-color lighten-1 white-text">Nome: {{ teacher.user.name }}</div>
+                <div class="card-body">
+                    E-mail: <strong>{{ teacher.user.email }}</strong>
+                    <br />
+                    Número USP: <strong>{{ teacher.usp_number }}</strong>
+                </div>
+            </div>
+            <br />
+            <a class="btn btn-primary btn-block waves-effect" href="{% url 'teachers_list' %}" role="button">
+                Voltar
+            </a>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+
+{% endblock %}

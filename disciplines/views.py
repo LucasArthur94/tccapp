@@ -24,6 +24,16 @@ def disciplines_new(request):
     return render(request, 'discipline_form.html', {'disciplines_form': disciplines_form})
 
 @login_required
+def disciplines_show(request, id):
+    discipline = get_object_or_404(Discipline, pk=id)
+
+    if not request.user.is_superuser:
+        return render(request, 'statuses/401.html')
+
+
+    return render(request, 'discipline_show.html', {'discipline': discipline})
+
+@login_required
 def disciplines_update(request, id):
     if not request.user.is_superuser:
         return render(request, 'statuses/401.html')

@@ -37,6 +37,12 @@ def teachers_new(request):
     return render(request, 'teachers/teacher_form.html', {'users_form': users_form, 'teachers_form': teachers_form})
 
 @login_required
+def teachers_show(request, id):
+    teacher = get_object_or_404(Teacher, pk=id)
+
+    return render(request, 'teachers/teacher_show.html', {'teacher': teacher})
+
+@login_required
 def teachers_update(request, id):
     if not request.user.is_superuser:
         return render(request, 'statuses/401.html')
@@ -99,6 +105,12 @@ def students_new(request):
 
         return redirect('students_list')
     return render(request, 'students/student_form.html', {'users_form': users_form, 'students_form': students_form})
+
+@login_required
+def students_show(request, id):
+    student = get_object_or_404(Student, pk=id)
+
+    return render(request, 'students/student_show.html', {'student': student})
 
 @login_required
 def students_update(request, id):
@@ -178,6 +190,12 @@ def guests_new(request):
 
         return redirect('guests_list')
     return render(request, 'guests/guest_form.html', {'users_form': users_form, 'guests_form': guests_form})
+
+@login_required
+def guests_show(request, id):
+    guest = get_object_or_404(Guest, pk=id)
+
+    return render(request, 'guests/guest_show.html', {'guest': guest})
 
 @login_required
 def guests_update(request, id):
