@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
 from gdstorage.storage import GoogleDriveStorage
+from users.models import User
 from activities.models import Activity
 from workgroups.models import Workgroup
 
@@ -21,6 +22,7 @@ class Delivery(models.Model):
     )
 
     REQUIRED_FIELDS = (
+        'author',
         'submission_date',
         'main_file',
         'side_file',
@@ -34,6 +36,7 @@ class Delivery(models.Model):
         'updated_at',
     )
 
+    author = models.ForeignKey(User, related_name='author', on_delete=models.CASCADE)
     submission_date = models.DateField(
         default=date.today
     )

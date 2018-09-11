@@ -4,40 +4,21 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <h3 class="text-center">Informações da Disciplina</h3>
+            <h3 class="text-center">Informações da Entrega</h3>
             <br />
             <div class="card">
-                <div class="card-header primary-color lighten-1 white-text">Dados da Disciplina</div>
+                {%  %}
+                    <div class="card-header success-color lighten-1 white-text">Status: Avaliada pelo Orientador</div>
+                {%  %}
+                    <div class="card-header warning-color lighten-1 white-text">Status: Avaliada pelo Co-orientador</div>
+                {%  %}
+                    <div class="card-header danger-color lighten-1 white-text">Status: Não avaliada</div>
+                {% endif %}
                 <div class="card-body">
-                    Modalidade:
-                        {% if discipline.modality == 'QDR' %}
-                            <strong>Quadrimestral</strong>
-                        {% elif discipline.modality == 'SMS' %}
-                            <strong>Semestral</strong>
-                        {% else %}
-                            <strong>{{ discipline.modality }}</strong>
-                        {% endif %}
+                    Autor: <strong>{{ delivery.author.name }}</strong>
+                    Data da Submissão: <strong>{{ delivery.submission_date }}</strong>
                     <br />
-                    Atividades:
-                        {% if discipline.activity_set.count > 0 %}
-                            <ul>
-                                {% for activity in discipline.activity_set.all %}
-                                    {% if user.is_superuser %}
-                                        <a href="{% url 'activities_show' discipline.pk activity.pk %}">
-                                            <li><strong>{{ activity.name }}</strong></li>
-                                        </a>
-                                    {% else %}
-                                        <li><strong>{{ activity.name }}</strong></li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <strong>Sem atividades cadastradas</strong>
-                            <br />
-                        {% endif %}
-                    Data de Início: <strong>{{ discipline.start_date }}</strong>
-                    <br />
-                    Data de Término: <strong>{{ discipline.end_date }}</strong>
+
                 </div>
             </div>
             <br />
