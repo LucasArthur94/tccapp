@@ -22,9 +22,13 @@
                         {% if discipline.activity_set.count > 0 %}
                             <ul>
                                 {% for activity in discipline.activity_set.all %}
-                                    <a href="{% url 'activities_show' discipline.pk activity.pk %}">
+                                    {% if user.is_superuser %}
+                                        <a href="{% url 'activities_show' discipline.pk activity.pk %}">
+                                            <li><strong>{{ activity.name }}</strong></li>
+                                        </a>
+                                    {% else %}
                                         <li><strong>{{ activity.name }}</strong></li>
-                                    </a>
+                                    {% endif %}
                                 {% endfor %}
                             </ul>
                         {% else %}

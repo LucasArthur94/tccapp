@@ -10,7 +10,7 @@ def deliveries_list(request, activity_id):
         return render(request, 'statuses/401.html')
 
     deliveries = Delivery.objects.filter(activity__id=activity_id)
-    return render(request, 'deliveries_list.html', {'deliveries': deliveries, 'activity_id': activity_id})
+    return render(request, 'deliveries.html', {'deliveries': deliveries, 'activity_id': activity_id})
 
 @login_required
 def deliveries_list_by_workgroup(request, activity_id, workgroup_id):

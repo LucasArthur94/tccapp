@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from disciplines.models import Discipline
 
@@ -34,3 +35,7 @@ class Activity(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
+
+    # Discipline methods
+    def is_closed(self):
+        return self.due_date < date.today()

@@ -7,7 +7,10 @@ from .forms import  DisciplinesForm
 
 @login_required
 def disciplines_list(request):
-    disciplines = Discipline.objects.all()
+    if request.user.is_superuser:
+        disciplines = Discipline.objects.all()
+    else:
+        disciplines = Discipline.objects.filter(users__in=[request.user]).distinct()
     return render(request, 'disciplines.html', {'disciplines': disciplines})
 
 @login_required
@@ -26,10 +29,6 @@ def disciplines_new(request):
 @login_required
 def disciplines_show(request, id):
     discipline = get_object_or_404(Discipline, pk=id)
-
-    if not request.user.is_superuser:
-        return render(request, 'statuses/401.html')
-
 
     return render(request, 'discipline_show.html', {'discipline': discipline})
 

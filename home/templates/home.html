@@ -5,6 +5,9 @@
     <div class='col-md-12'>
         {% if user.is_authenticated %}
             <h1 class='text-center'>Bem vindo, {{ user.name }}!</h1>
+            {% if user.student %}
+                {% include 'student.html' %}
+            {% endif %}
         {% else %}
             <h1 class='text-center'>Bem vindo, visitante!</h1>
         {% endif %}
