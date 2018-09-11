@@ -147,7 +147,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'staticfiles/gdrive.json'
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'statics/gdrive.json'
 
 LOGIN_URL = '/login/'
 
