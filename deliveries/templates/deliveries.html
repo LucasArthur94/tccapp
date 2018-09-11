@@ -68,7 +68,7 @@
             {% if not activity.is_closed %}
                 <a href="{% url 'deliveries_new' activity.pk %}" class="btn btn-primary float-right"> Nova Submissão</a>
             {% endif %}
-            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'activities_list' activity_discipline.id %}" role="button">
+            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'activities_list' activity.discipline.id %}" role="button">
                 Voltar
             </a>
             <div class="clearfix"></div>
