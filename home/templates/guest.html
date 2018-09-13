@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="text-center">Entregas</h3>
+        <br />
+        <div class="row">
+            {% if deliveries|length > 0 %}
+                {% for delivery in deliveries %}
+                    <div class="col-lg-4">
+                        <div class="card">
+                            {% if delivery.status == 'AAD' %}
+                                <div class="card-header success-color lighten-1 white-text">Status: Avaliada pelo Orientador</div>
+                            {% elif delivery.status == 'AGS' %}
+                                <div class="card-header warning-color lighten-1 white-text">Status: Avaliada pelo Co-orientador</div>
+                            {% else %}
+                                <div class="card-header danger-color lighten-1 white-text">Status: Não avaliada</div>
+                            {% endif %}
+                            <div class="card-body">
+                                Autor: <strong>{{ delivery.author.name }}</strong>
+                                <br />
+                                Data da Submissão: <strong>{{ delivery.submission_date }}</strong>
+                                <br />
+                                {% if delivery.activity.main_file_required %}
+                                    Arquivo Principal: <a href="{{ delivery.main_file.url }}" target="_blank">{{ delivery.activity.main_file_name }}</a>
+                                    <br />
+                                {% endif %}
+                                {% if delivery.activity.side_file_required %}
+                                    Arquivo Secundário: <a href="{{ delivery.main_file.url }}" target="_blank">{{ delivery.activity.main_file_name }}</a>
+                                    <br />
+                                {% endif %}
+                                {% if delivery.status != 'NAV' %}
+                                    Nota: <strong>{{ delivery.score }}</strong>
+                                    <br />
+                                {% endif %}
+                                <br />
+                                <div class="btn-group float-right" role="group" aria-label="Activity home operations">
+                                    <a href="{% url 'deliveries_show' delivery.activity.pk delivery.pk %}" class="btn btn-info btn-sm">
+                                        <strong>Ver mais</strong>
+                                    </a>
+                                    <br />
+                                    {% if not delivery.activity.is_closed and user.student %}
+                                        <a href="{% url 'deliveries_update' delivery.activity.pk delivery.pk %}" class="btn btn-primary btn-sm">
+                                            <strong>Editar</strong>
+                                        </a>
+                                        <br />
+                                    {% endif %}
+                                    {% if user.teacher or user.guest %}
+                                        <a href="{% url 'deliveries_review' delivery.activity.pk delivery.pk %}" class="btn btn-secondary btn-sm">
+                                            {% if delivery.status == 'NAV' %}
+                                                <strong>Avaliar</strong>
+                                            {% else %}
+                                                <strong>Reavaliar</strong>
+                                            {% endif %}
+                                        </a>
+                                        <br />
+                                    {% endif %}
+                                    {% if user.coordinator %}
+                                        <a href="{% url 'deliveries_delete' delivery.activity.pk delivery.pk %}" class="btn btn-danger btn-sm">
+                                            <strong>Apagar</strong>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <br />
+                <h2 class='text-center'>Ainda não há entregas!</h2>
+            {% endif %}
+        </div>
+        <br />
+    </div>
+</div>
