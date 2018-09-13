@@ -30,7 +30,7 @@ class StudentsDeliveriesForm(ModelForm):
 class AdvisorsGuestsDeliveriesForm(ModelForm):
     class Meta:
         model = Delivery
-        fields = ['public_comments', 'private_comments', 'score']
+        fields = ['score', 'public_comments', 'private_comments']
         labels = {
             'public_comments': ('Comentários Públicos'),
             'private_comments': ('Comentários Privados'),

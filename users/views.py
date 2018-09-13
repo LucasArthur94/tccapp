@@ -180,6 +180,7 @@ def guests_new(request):
         new_guest = guests_form.save(commit=False)
 
         new_user.username = new_user.email
+        new_user.is_staff = True
         new_user.set_password('tccpoliusp')
         new_user.save()
 

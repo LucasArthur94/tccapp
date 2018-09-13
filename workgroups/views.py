@@ -33,7 +33,7 @@ def workgroups_new(request):
 def workgroups_show(request, id):
     workgroup = get_object_or_404(Workgroup, pk=id)
 
-    if not request.user.is_superuser and not request.user in workgroup.students.all():
+    if not request.user.is_superuser and not (request.user in workgroup.students.all() or request.user == workgroup.guest or request.user == workgroup.advisor):
         return render(request, 'statuses/401.html')
 
 

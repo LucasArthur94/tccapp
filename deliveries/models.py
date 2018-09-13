@@ -1,5 +1,6 @@
-from django.db import models
 from datetime import date
+from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 from gdstorage.storage import GoogleDriveStorage
 from users.models import User
 from activities.models import Activity
@@ -62,9 +63,13 @@ class Delivery(models.Model):
         default='',
     )
     score = models.DecimalField(
-        max_digits=2,
+        max_digits=3,
         decimal_places=1,
-        default=0.0
+        default=0.0,
+        validators=[
+            MaxValueValidator(10.0),
+            MinValueValidator(0.0),
+        ]
     )
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     workgroup = models.ForeignKey(Workgroup, on_delete=models.CASCADE)

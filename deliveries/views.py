@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import  Delivery
-from .forms import StudentsDeliveriesForm
+from .forms import StudentsDeliveriesForm, AdvisorsGuestsDeliveriesForm
 from workgroups.models import Workgroup
 from activities.models import Activity
 
@@ -58,7 +58,7 @@ def deliveries_update(request, activity_id, id):
     if not workgroup or activity.is_closed() or delivery.status != 'NAV':
         return render(request, 'statuses/401.html')
 
-    students_deliveries_form = StudentsDeliveriesForm(activity, request.POST or None, request.FILES or None)
+    students_deliveries_form = StudentsDeliveriesForm(activity, request.POST or None, request.FILES or None, instance=delivery)
 
     if students_deliveries_form.is_valid():
         new_delivery = students_deliveries_form.save(commit=False)
@@ -74,20 +74,23 @@ def deliveries_review(request, activity_id, id):
 
     activity = get_object_or_404(Activity, pk=activity_id)
 
-    workgroup = Workgroup.objects.filter(students__in=[request.user]).order_by('-created_at').first()
+    workgroup = Workgroup.objects.filter(Q(guest=request.user) | Q(advisor=request.user)).order_by('-created_at').first()
 
-    if not workgroup or activity.is_closed() or delivery.status != 'NAV':
+    if not workgroup or (delivery.status == 'AAD' and not hasattr(request.user, 'teacher')):
         return render(request, 'statuses/401.html')
 
-    students_deliveries_form = StudentsDeliveriesForm(activity, request.POST or None, request.FILES or None)
+    advisors_guests_deliveries_form = AdvisorsGuestsDeliveriesForm(request.POST or None, instance=delivery)
 
-    if students_deliveries_form.is_valid():
-        new_delivery = students_deliveries_form.save(commit=False)
-        new_delivery.author_id = request.user.pk
+    if advisors_guests_deliveries_form.is_valid():
+        new_delivery = advisors_guests_deliveries_form.save(commit=False)
+        if hasattr(request.user, 'guest'):
+            new_delivery.status = 'AGS'
+        elif hasattr(request.user, 'teacher'):
+            new_delivery.status = 'AAD'
         new_delivery.save()
 
         return redirect('deliveries_list', activity_id=activity_id)
-    return render(request, 'student_delivery_form.html', {'students_deliveries_form': students_deliveries_form, 'activity': activity})
+    return render(request, 'advisor_guest_delivery_form.html', {'advisors_guests_deliveries_form': advisors_guests_deliveries_form, 'activity': activity})
 
 @login_required
 def deliveries_delete(request, activity_id, id):

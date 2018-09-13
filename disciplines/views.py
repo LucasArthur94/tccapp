@@ -7,6 +7,7 @@ from .forms import  DisciplinesForm
 
 @login_required
 def disciplines_list(request):
+    print(request.user.is_staff)
     if request.user.is_superuser or request.user.is_staff:
         disciplines = Discipline.objects.all()
     else:
