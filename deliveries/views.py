@@ -16,7 +16,15 @@ def deliveries_list(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
 
     deliveries = Delivery.objects.filter(activity__id=activity_id)
-    return render(request, 'deliveries.html', {'deliveries': deliveries, 'activity': activity})
+    return render(request, 'deliveries.html', {'deliveries': deliveries, 'activity': activity, 'discipline_id': activity.discipline.pk})
+
+@login_required
+def deliveries_show(request, activity_id, id):
+    activity = get_object_or_404(Activity, pk=activity_id)
+
+    delivery = get_object_or_404(Delivery, pk=id)
+
+    return render(request, 'delivery_show.html', {'delivery': delivery, 'activity': activity})
 
 @login_required
 def deliveries_new(request, activity_id):
@@ -27,7 +35,7 @@ def deliveries_new(request, activity_id):
     if not workgroup or activity.is_closed():
         return render(request, 'statuses/401.html')
 
-    students_deliveries_form = StudentsDeliveriesForm(request.POST or None, request.FILES or None)
+    students_deliveries_form = StudentsDeliveriesForm(activity, request.POST or None, request.FILES or None)
 
     if students_deliveries_form.is_valid():
         new_delivery = students_deliveries_form.save(commit=False)
@@ -38,3 +46,62 @@ def deliveries_new(request, activity_id):
 
         return redirect('deliveries_list', activity_id=activity_id)
     return render(request, 'student_delivery_form.html', {'students_deliveries_form': students_deliveries_form, 'activity': activity})
+
+@login_required
+def deliveries_update(request, activity_id, id):
+    delivery = get_object_or_404(Delivery, pk=id)
+
+    activity = get_object_or_404(Activity, pk=activity_id)
+
+    workgroup = Workgroup.objects.filter(students__in=[request.user]).order_by('-created_at').first()
+
+    if not workgroup or activity.is_closed() or delivery.status != 'NAV':
+        return render(request, 'statuses/401.html')
+
+    students_deliveries_form = StudentsDeliveriesForm(activity, request.POST or None, request.FILES or None)
+
+    if students_deliveries_form.is_valid():
+        new_delivery = students_deliveries_form.save(commit=False)
+        new_delivery.author_id = request.user.pk
+        new_delivery.save()
+
+        return redirect('deliveries_list', activity_id=activity_id)
+    return render(request, 'student_delivery_form.html', {'students_deliveries_form': students_deliveries_form, 'activity': activity})
+
+@login_required
+def deliveries_review(request, activity_id, id):
+    delivery = get_object_or_404(Delivery, pk=id)
+
+    activity = get_object_or_404(Activity, pk=activity_id)
+
+    workgroup = Workgroup.objects.filter(students__in=[request.user]).order_by('-created_at').first()
+
+    if not workgroup or activity.is_closed() or delivery.status != 'NAV':
+        return render(request, 'statuses/401.html')
+
+    students_deliveries_form = StudentsDeliveriesForm(activity, request.POST or None, request.FILES or None)
+
+    if students_deliveries_form.is_valid():
+        new_delivery = students_deliveries_form.save(commit=False)
+        new_delivery.author_id = request.user.pk
+        new_delivery.save()
+
+        return redirect('deliveries_list', activity_id=activity_id)
+    return render(request, 'student_delivery_form.html', {'students_deliveries_form': students_deliveries_form, 'activity': activity})
+
+@login_required
+def deliveries_delete(request, activity_id, id):
+    delivery = get_object_or_404(Delivery, pk=id)
+
+    activity = get_object_or_404(Activity, pk=activity_id)
+
+    workgroup = Workgroup.objects.filter(students__in=[request.user]).order_by('-created_at').first()
+
+    if not workgroup or activity.is_closed() or delivery.status != 'NAV':
+        return render(request, 'statuses/401.html')
+
+    if request.method == 'POST':
+        delivery.delete()
+        return redirect('deliveries_list', activity_id=activity_id)
+
+    return render(request, 'delivery_delete_confirm.html', {'delivery': delivery})

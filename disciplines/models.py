@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from users.models import User
 
@@ -33,3 +34,6 @@ class Discipline(models.Model):
     # Discipline methods
     def is_valid_date(self):
         return self.end_date > self.start_date
+
+    def is_closed(self):
+        return self.end_date < date.today()

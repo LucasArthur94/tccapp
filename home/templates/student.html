@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="text-center">Atividades</h3>
+        <br />
+        {% if activities|length > 0 %}
+            {% for activity in activities %}
+                <div class="col-lg-4">
+                    <div class="card">
+                        {% if activity.is_closed %}
+                            <div class="card-header danger-color lighten-1 white-text">{{ activity.name }} - Fechada</div>
+                        {% else %}
+                            <div class="card-header success-color lighten-1 white-text">{{ activity.name }} - Aberta</div>
+                        {% endif %}
+                        <div class="card-body">
+                            Data Limite: <strong>{{ activity.due_date }}</strong>
+                            <br />
+                            <br />
+                            <div class="btn-group float-right" role="group" aria-label="Activity home operations">
+                                {% if not activity.is_closed %}
+                                    <a href="{% url 'deliveries_new' activity.id %}" class="btn btn-default btn-sm">
+                                        <strong>Realizar Entrega</strong>
+                                    </a>
+                                    <br />
+                                {% endif %}
+                                <a href="{% url 'deliveries_list' activity.id %}" class="btn btn-warning btn-sm"> <strong>Ver Entregas</strong></a>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="btn-group float-right" role="group" aria-label="Activity home operations">
+                                {% if user.coordinator %}
+                                    <a href="{% url 'activities_show' discipline_id activity.pk %}" class="btn btn-info btn-sm">
+                                        <strong>Ver mais</strong>
+                                    </a>
+                                    <br />
+                                    <a href="{% url 'activities_update' discipline_id activity.pk %}" class="btn btn-primary btn-sm">
+                                        <strong>Editar</strong>
+                                    </a>
+                                    <br />
+                                    <a href="{% url 'activities_delete' discipline_id activity.pk %}" class="btn btn-danger btn-sm">
+                                        <strong>Apagar</strong>
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <br />
+            <h2 class='text-center'>Sem atividades cadastradas nesta disciplina!</h2>
+        {% endif %}
+        <br />
+    </div>
+</div>

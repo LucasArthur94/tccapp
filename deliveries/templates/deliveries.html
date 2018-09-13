@@ -2,73 +2,82 @@
 
 {% block main %}
     <div class="row">
-        <div class="col-md-12">
-            <h3 class="text-center">Listagem de Entregas da Atividade</h3>
-            {% if deliveries|length > 0 %}
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Autor</th>
-                                <th scope="col">Data de Submissão</th>
-                                <th scope="col">Arquivo Principal</th>
-                                <th scope="col">Arquivo Secundário</th>
-                                <th scope="col">Status de Avaliação</th>
-                                <th scope="col">Nota</th>
-                                <th scope="col">Opções</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for delivery in deliveries %}
-                            <tr>
-                                <th>{{ delivery.author }}</th>
-                                <th>{{ delivery.submission_date }}</th>
-                                <th>
-                                    {% if delivery.main_file %}
-                                        <span class="badge badge-success">Presente</span>
-                                    {% else %}
-                                        <span class="badge badge-warning">Ausente</span>
+        <div class="col-lg-12">
+            <h3 class="text-center">Entregas da Atividade</h3>
+            <br />
+            <div class="row">
+                {% if deliveries|length > 0 %}
+                    {% for delivery in deliveries %}
+                        <div class="col-lg-4">
+                            <div class="card">
+                                {% if delivery.status == 'AAD' %}
+                                    <div class="card-header success-color lighten-1 white-text">Status: Avaliada pelo Orientador</div>
+                                {% elif delivery.status == 'AGS' %}
+                                    <div class="card-header warning-color lighten-1 white-text">Status: Avaliada pelo Co-orientador</div>
+                                {% else %}
+                                    <div class="card-header danger-color lighten-1 white-text">Status: Não avaliada</div>
+                                {% endif %}
+                                <div class="card-body">
+                                    Autor: <strong>{{ delivery.author.name }}</strong>
+                                    <br />
+                                    Data da Submissão: <strong>{{ delivery.submission_date }}</strong>
+                                    <br />
+                                    {% if activity.main_file_required %}
+                                        Arquivo Principal: <a href="{{ delivery.main_file.url }}" target="_blank">{{ activity.main_file_name }}</a>
+                                        <br />
                                     {% endif %}
-                                </th>
-                                <th>
-                                    {% if delivery.side_file %}
-                                        <span class="badge badge-success">Presente</span>
-                                    {% else %}
-                                        <span class="badge badge-warning">Ausente</span>
+                                    {% if activity.side_file_required %}
+                                        Arquivo Secundário: <a href="{{ delivery.main_file.url }}" target="_blank">{{ activity.main_file_name }}</a>
+                                        <br />
                                     {% endif %}
-                                </th>
-                                <th>
-                                    {% if delivery.status == 'AAD' %}
-                                        <span class="badge badge-success">Avaliado pelo Orientador</span>
-                                    {% elif delivery.status == 'AGS' %}
-                                        <span class="badge badge-warning">Avaliado pelo Co-orientador</span>
-                                    {% else %}
-                                        <span class="badge badge-danger">Não Avaliado</span>
+                                    {% if delivery.status != 'NAV' %}
+                                        Nota: <strong>{{ delivery.score }}</strong>
+                                        <br />
                                     {% endif %}
-                                </th>
-                                <th>
-                                    {% if delivery.status == 'NAV' %}
-                                        Não Avaliado
-                                    {% else %}
-                                        {{ delivery.score }}
-                                    {% endif %}
-                                </th>
-                                <th>
-                                    Opções
-                                </th>
-                            </tr>
-                        {% endfor %}
-                      </tbody>
-                    </table>
-                </div>
-            {% else %}
-                <br />
-                <h2 class='text-center'>Sem entregas dessa atividade!</h2>
-            {% endif %}
+                                    <br />
+                                    <div class="btn-group float-right" role="group" aria-label="Activity home operations">
+                                        <a href="{% url 'deliveries_show' activity.pk delivery.pk %}" class="btn btn-info btn-sm">
+                                            <strong>Ver mais</strong>
+                                        </a>
+                                        <br />
+                                        {% if not activity.is_closed %}
+                                            <a href="{% url 'deliveries_update' activity.pk delivery.pk %}" class="btn btn-primary btn-sm">
+                                                <strong>Editar</strong>
+                                            </a>
+                                            <br />
+                                        {% endif %}
+                                        {% if user.teacher or user.guest %}
+                                            <a href="{% url 'deliveries_review' activity.pk delivery.pk %}" class="btn btn-secondary btn-sm">
+                                                {% if delivery.status == 'NAV' %}
+                                                    <strong>Avaliar</strong>
+                                                {% else %}
+                                                    <strong>Reavaliar</strong>
+                                                {% endif %}
+                                            </a>
+                                            <br />
+                                        {% endif %}
+                                        {% if user.coordinator %}
+                                            <a href="{% url 'deliveries_delete' activity.pk delivery.pk %}" class="btn btn-danger btn-sm">
+                                                <strong>Apagar</strong>
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                {% else %}
+                    <br />
+                    <h2 class='text-center'>Ainda não há entregas desta atividade!</h2>
+                {% endif %}
+            </div>
+            <br />
             {% if not activity.is_closed %}
-                <a href="{% url 'deliveries_new' activity.pk %}" class="btn btn-primary float-right"> Nova Submissão</a>
+                <a href="{% url 'deliveries_new' activity.pk %}" class="btn btn-primary float-right"> Nova Entrega</a>
             {% endif %}
-            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'activities_list' activity.discipline.id %}" role="button">
+            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'activities_list' discipline_id %}" role="button">
                 Voltar
             </a>
             <div class="clearfix"></div>
