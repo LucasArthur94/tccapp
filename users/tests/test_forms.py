@@ -5,7 +5,7 @@ from users.forms import  UsersForm, StudentsForm, TeachersForm, GuestsForm, Coor
 
 class StudentFormTestCase(TestCase):
     def test_valid_form(self):
-        user_data = {'username': 'aluno@poli.usp.br', 'name': 'Aluno Teste', 'email': 'aluno@poli.usp.br'}
+        user_data = {'username': 'aluno_novo@poli.usp.br', 'name': 'Aluno Teste', 'email': 'aluno_novo@poli.usp.br'}
         student_data = {'usp_number': '1111111'}
         user_form = UsersForm(data=user_data)
         student_form = StudentsForm(data=student_data)
