@@ -6,15 +6,15 @@ from users.forms import  UsersForm, StudentsForm, TeachersForm, GuestsForm, Coor
 class StudentFormTestCase(TestCase):
     def test_valid_form(self):
         user_data = {'username': 'aluno@poli.usp.br', 'name': 'Aluno Teste', 'email': 'aluno@poli.usp.br'}
-        student_data = {'usp_number': '1234567'}
+        student_data = {'usp_number': '1111111'}
         user_form = UsersForm(data=user_data)
         student_form = StudentsForm(data=student_data)
         self.assertTrue(user_form.is_valid())
         self.assertTrue(student_form.is_valid())
 
     def test_invalid_form(self):
-        user = User.objects.create(username='aluno2@poli.usp.br', name="Aluno Teste", email='aluno2@poli.usp.br', password='7654321')
-        student = Student.objects.create(usp_number='7654321', user=user)
+        user = User.objects.create(username='aluno2@poli.usp.br', name="Aluno Teste", email='aluno2@poli.usp.br', password='7654322')
+        student = Student.objects.create(usp_number='7654322', user=user)
         user_data = {'username': user.username, 'name': user.name, 'email': user.email}
         student_data = {'usp_number': student.usp_number}
         user_form = UsersForm(data=user_data)
