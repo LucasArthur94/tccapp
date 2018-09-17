@@ -7,7 +7,7 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ workgroups_form|bootstrap }}
-            <button type="submit" class="btn btn-primary float-right">Salvar</button>
+            <button type="submit" id="submit" class="btn btn-primary float-right">Salvar</button>
             <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'workgroups_list' %}" role="button">
                 Voltar
             </a>

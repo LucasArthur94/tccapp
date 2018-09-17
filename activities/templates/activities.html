@@ -57,7 +57,7 @@
             </div>
             <br />
             {% if user.coordinator %}
-                <a href="{% url 'activities_new' discipline_id %}" class="btn btn-primary float-right"> Nova Atividade da Disciplina</a>
+                <a href="{% url 'activities_new' discipline_id %}" id="new-activity" class="btn btn-primary float-right"> Nova Atividade da Disciplina</a>
             {% endif %}
             <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'disciplines_list' %}" role="button">
                 Voltar

@@ -7,8 +7,8 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ disciplines_form|bootstrap }}
-            <button type="submit" class="btn btn-primary float-right">Salvar</button>
-            <a class="btn btn-secondary float-right" href="{% url 'students_new_bulk' %}" role="button">
+            <button type="submit" id="submit" class="btn btn-primary float-right">Salvar</button>
+            <a class="btn btn-secondary float-right" href="{% url 'students_new_bulk' %}" id="new-student-bulk" role="button">
                 Cadastrar alunos massivamente
             </a>
             <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'disciplines_list' %}" role="button">

@@ -43,8 +43,8 @@
                 <br />
                 <h2 class='text-center'>Sem alunos cadastrados!</h2>
             {% endif %}
-            <a href="{% url 'students_new' %}" class="btn btn-primary float-right"> Novo Aluno</a>
-            <a class="btn btn-secondary float-right" href="{% url 'students_new_bulk' %}" role="button">
+            <a href="{% url 'students_new' %}" id="new-student" class="btn btn-primary float-right"> Novo Aluno</a>
+            <a class="btn btn-secondary float-right" id="new-student-bulk" href="{% url 'students_new_bulk' %}" role="button">
                 Cadastrar alunos massivamente
             </a>
             <div class="clearfix"></div>
