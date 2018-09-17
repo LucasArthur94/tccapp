@@ -36,6 +36,6 @@ class Activity(models.Model):
         auto_now=True
     )
 
-    # Discipline methods
+    # Activity methods
     def is_closed(self):
         return self.due_date < date.today()

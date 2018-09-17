@@ -10,9 +10,9 @@
                     {% for delivery in deliveries %}
                         <div class="col-lg-4">
                             <div class="card">
-                                {% if delivery.status == 'AAD' %}
+                                {% if delivery.is_avaliated_by_advisor %}
                                     <div class="card-header success-color lighten-1 white-text">Status: Avaliada pelo Orientador</div>
-                                {% elif delivery.status == 'AGS' %}
+                                {% elif delivery.is_avaliated_by_guest %}
                                     <div class="card-header warning-color lighten-1 white-text">Status: Avaliada pelo Co-orientador</div>
                                 {% else %}
                                     <div class="card-header danger-color lighten-1 white-text">Status: Não avaliada</div>
@@ -30,7 +30,7 @@
                                         Arquivo Secundário: <a href="{{ delivery.main_file.url }}" target="_blank">{{ activity.main_file_name }}</a>
                                         <br />
                                     {% endif %}
-                                    {% if delivery.status != 'NAV' %}
+                                    {% if delivery.is_avaliated and not user.student %}
                                         Nota: <strong>{{ delivery.score }}</strong>
                                         <br />
                                     {% endif %}
@@ -40,7 +40,7 @@
                                             <strong>Ver mais</strong>
                                         </a>
                                         <br />
-                                        {% if not activity.is_closed and user.student %}
+                                        {% if not delivery.is_avaliated and not activity.is_closed and user.student %}
                                             <a href="{% url 'deliveries_update' activity.pk delivery.pk %}" class="btn btn-primary btn-sm">
                                                 <strong>Editar</strong>
                                             </a>
@@ -48,7 +48,7 @@
                                         {% endif %}
                                         {% if user.teacher or user.guest %}
                                             <a href="{% url 'deliveries_review' activity.pk delivery.pk %}" class="btn btn-secondary btn-sm">
-                                                {% if delivery.status == 'NAV' %}
+                                                {% if not delivery.is_avaliated %}
                                                     <strong>Avaliar</strong>
                                                 {% else %}
                                                     <strong>Reavaliar</strong>

@@ -7,9 +7,9 @@
             <h3 class="text-center">Informações da Entrega</h3>
             <br />
             <div class="card">
-                {% if delivery.status == 'AAD' %}
+                {% if delivery.is_avaliated_by_advisor %}
                     <div class="card-header success-color lighten-1 white-text">Status: Avaliada pelo Orientador</div>
-                {% elif delivery.status == 'AGS' %}
+                {% elif delivery.is_avaliated_by_guest %}
                     <div class="card-header warning-color lighten-1 white-text">Status: Avaliada pelo Co-orientador</div>
                 {% else %}
                     <div class="card-header danger-color lighten-1 white-text">Status: Não avaliada</div>
@@ -27,13 +27,13 @@
                         Arquivo Secundário: <a href="{{ delivery.main_file.url }}" target="_blank">{{ activity.main_file_name }}</a>
                         <br />
                     {% endif %}
-                    {% if delivery.status != 'NAV' %}
-                        Nota: <strong>{{ delivery.score }}</strong>
-                        <br />
-                    {% endif %}
                     Comentários: <strong>{{ delivery.public_comments }}</strong>
                     <br />
                     {% if user.coordinator or user.teacher or user.guest %}
+                        {% if delivery.is_avaliated %}
+                            Nota: <strong>{{ delivery.score }}</strong>
+                            <br />
+                        {% endif %}
                         Comentários para Coordenação: <strong>{{ delivery.private_comments }}</strong>
                         <br />
                     {% endif %}

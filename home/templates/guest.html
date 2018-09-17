@@ -45,7 +45,7 @@
                                     {% endif %}
                                     {% if user.teacher or user.guest %}
                                         <a href="{% url 'deliveries_review' delivery.activity.pk delivery.pk %}" class="btn btn-secondary btn-sm">
-                                            {% if delivery.status == 'NAV' %}
+                                            {% if not delivery.is_avaliated %}
                                                 <strong>Avaliar</strong>
                                             {% else %}
                                                 <strong>Reavaliar</strong>

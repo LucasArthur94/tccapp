@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import  Delivery
 from .forms import StudentsDeliveriesForm, AdvisorsGuestsDeliveriesForm
+from .utils import send_new_delivery_mail
 from workgroups.models import Workgroup
 from activities.models import Activity
 
@@ -44,6 +45,8 @@ def deliveries_new(request, activity_id):
         new_delivery.workgroup_id = workgroup.pk
         new_delivery.save()
 
+        send_new_delivery_mail(new_delivery)
+
         return redirect('deliveries_list', activity_id=activity_id)
     return render(request, 'student_delivery_form.html', {'students_deliveries_form': students_deliveries_form, 'activity': activity})
 
@@ -55,7 +58,7 @@ def deliveries_update(request, activity_id, id):
 
     workgroup = Workgroup.objects.filter(students__in=[request.user]).order_by('-created_at').first()
 
-    if not workgroup or activity.is_closed() or delivery.status != 'NAV':
+    if not workgroup or activity.is_closed() or delivery.is_avaliated:
         return render(request, 'statuses/401.html')
 
     students_deliveries_form = StudentsDeliveriesForm(activity, request.POST or None, request.FILES or None, instance=delivery)
@@ -76,7 +79,7 @@ def deliveries_review(request, activity_id, id):
 
     workgroup = Workgroup.objects.filter(Q(guest=request.user) | Q(advisor=request.user)).order_by('-created_at').first()
 
-    if not workgroup or (delivery.status == 'AAD' and not hasattr(request.user, 'teacher')):
+    if not workgroup or (delivery.is_avaliated_by_advisor and not hasattr(request.user, 'teacher')):
         return render(request, 'statuses/401.html')
 
     advisors_guests_deliveries_form = AdvisorsGuestsDeliveriesForm(request.POST or None, instance=delivery)
@@ -100,7 +103,7 @@ def deliveries_delete(request, activity_id, id):
 
     workgroup = Workgroup.objects.filter(students__in=[request.user]).order_by('-created_at').first()
 
-    if not workgroup or activity.is_closed() or delivery.status != 'NAV':
+    if not workgroup or activity.is_closed() or delivery.is_avaliated:
         return render(request, 'statuses/401.html')
 
     if request.method == 'POST':

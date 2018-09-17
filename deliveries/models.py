@@ -79,3 +79,13 @@ class Delivery(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
+
+    # Delivery methods
+    def is_avaliated_by_guest(self):
+        return self.status == 'AGS'
+
+    def is_avaliated_by_advisor(self):
+        return self.status == 'AAD'
+
+    def is_avaliated(self):
+        return self.is_avaliated_by_guest or self.is_avaliated_by_advisor

@@ -20,7 +20,7 @@
                                     <br />
                                     <br />
                                     <div class="btn-group float-right" role="group" aria-label="Activity home operations">
-                                        {% if not activity.is_closed and not user.student %}
+                                        {% if not activity.is_closed and user.student %}
                                             <a href="{% url 'deliveries_new' activity.id %}" class="btn btn-default btn-sm">
                                                 <strong>Realizar Entrega</strong>
                                             </a>
