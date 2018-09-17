@@ -8,3 +8,10 @@ install:
   - pip install -r requirements.txt
 script:
   - python manage.py test
+secure:
+  "lySjRTC+PMP209C2zrxVy8YYoHCiBredB1HXwahzHzd8X0cy6aAF22IWsS2hwx0pphQKyjrfh4ykxxLW8r4PoabjAGYAdlYN64DeKxRET5bwvGGPsHNjCR3MFoBUhGXkQaLQ72O2v6ttcTOumutZbUEdHSuKFFCmobCO2DXuduPcn2X6BGVWM4OGsUyB9pVm995/6/5z8FDDBIhf9Ztx0VOl7FCvW80Xsxe6jzQEa67bS2oo/JbfjoYMZYI4RJdjpPzGoMLPPwULTPRYUD52u6WZneAlLANMp7EGLJI+RDewx/chyPyPSKjQoXp778mWoyesofZcSOSyX5Vgt326KhURr2EsAY4tfaGj9TFhnrF+G81o7CO2+zfY4DxUNkKQ4iVmawXYgU41jtWcYNisnCRhOSzvl+HgB87ZY8zARj2sSAVz/9wK4pe7tHniwUf/iZNUCggRlvzZArlToTNNjFQ0zOLCy2d7Y0AyhMNnFgX5RpuDRO4I5aunua7EdkcxLN8coPnLeRAVlM8F1WFI+d+cNSyOaP5vY2q0nNdSoGopAB13lQ5ZD1h0PgkvpY/HzhuXQ46WroNRniFUw4VxZP0Q4+ksGewnOp1KSrqrtQR1xfeqQowK0JXNYq8WB834z5iSlYo5UUuEehvbqjjE3TkHc6vBo0r/IKvrN3s92zo="
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: "YOUR ENCRYPTED API KEY"
