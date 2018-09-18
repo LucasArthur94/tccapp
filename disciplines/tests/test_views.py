@@ -28,7 +28,6 @@ class NewDisciplineTestCase(StaticLiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
-    @skip("Quantic test to fix it")
     def test_teacher_sign_up_fire(self):
         self.browser.find_element_by_id('coordinator-disciplines').click()
         self.browser.find_element_by_id('new-discipline').click()
