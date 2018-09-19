@@ -116,19 +116,19 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'users.User'
 
-REDIS_URL = config('REDIS_URL', default="redis://127.0.0.1:6379", cast=dburl)
+REDIS_URL = config('REDIS_URL', default="redis://127.0.0.1:6379")
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "{}/1".format(REDIS_URL),
+        "LOCATION": ("%s/1" % (REDIS_URL)),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
     'select2': {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "{}/2".format(REDIS_URL),
+        "LOCATION": ("%s/2" % (REDIS_URL)),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
