@@ -166,8 +166,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'statics/json/gdrive.json'

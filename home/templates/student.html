@@ -3,6 +3,7 @@
         <h3 class="text-center">Atividades</h3>
         <br />
         {% if activities|length > 0 %}
+            <div class="row">
             {% for activity in activities %}
                 <div class="col-lg-4">
                     <div class="card">
@@ -46,7 +47,7 @@
                     </div>
                 </div>
             {% endfor %}
-
+            </div>
         {% else %}
             <br />
             <h2 class='text-center'>Sem atividades cadastradas nesta disciplina!</h2>

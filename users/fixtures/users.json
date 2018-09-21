@@ -1,0 +1,66 @@
+[
+    {
+        "model": "users.user",
+        "pk": 1,
+        "fields": {
+            "name": "Paulo Sérgio Cugnasca",
+            "email": "cugnasca@usp.br",
+            "username": "cugnasca@usp.br",
+            "password": "pbkdf2_sha256$120000$oqxeqBnBOvLh$nhhUnZ2x7RW+pOIvFsdfaaOKLDSJl4fRRkXPv7qSSXw=",
+            "is_staff": true,
+            "is_superuser": true
+        }
+    },
+    {
+        "model": "users.coordinator",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "usp_number": 1234567,
+            "created_at": "2018-09-01 00:00:00",
+            "updated_at": "2018-09-01 00:00:00"
+        }
+    },
+    {
+        "model": "users.teacher",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "usp_number": 1234567,
+            "created_at": "2018-09-01 00:00:00",
+            "updated_at": "2018-09-01 00:00:00"
+        }
+    },
+        {
+        "model": "users.user",
+        "pk": 2,
+        "fields": {
+            "name": "João Batista Camargo Junior",
+            "email": "joaocamargo@usp.br",
+            "username": "joaocamargo@usp.br",
+            "password": "pbkdf2_sha256$120000$q2emjtA7TkCI$ru+iJ35TRUcCEqFdQ4T7N4NJRXFW9mxOL6Mpj7h5U24=",
+            "is_staff": true,
+            "is_superuser": true
+        }
+    },
+    {
+        "model": "users.coordinator",
+        "pk": 2,
+        "fields": {
+            "user": 2,
+            "usp_number": 7654321,
+            "created_at": "2018-09-01 00:00:00",
+            "updated_at": "2018-09-01 00:00:00"
+        }
+    },
+    {
+        "model": "users.teacher",
+        "pk": 2,
+        "fields": {
+            "user": 2,
+            "usp_number": 7654321,
+            "created_at": "2018-09-01 00:00:00",
+            "updated_at": "2018-09-01 00:00:00"
+        }
+    }
+]

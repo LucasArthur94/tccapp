@@ -5,9 +5,6 @@ from users.models import User
 from django.utils.translation import gettext_lazy as _
 from django_select2.forms import ModelSelect2MultipleWidget
 
-class DateInput(DateInput):
-    input_type = 'date'
-
 class DisciplinesForm(ModelForm):
     class Meta:
         model = Discipline
