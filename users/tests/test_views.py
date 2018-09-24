@@ -10,7 +10,7 @@ class SignUpTestCase(StaticLiveServerTestCase):
         self.browser = Chrome()
         self.browser.implicitly_wait(10)
 
-        user = User.objects.create_user(username='admin@poli.usp.br', name="Administrador Teste", email='admin@poli.usp.br', password='tccpoliusp', is_staff=True, is_superuser=True)
+        user = User.objects.create_user(username='admin@poli.usp.br', name="Administrador Teste", email='admin@poli.usp.br', password='1234567', is_staff=True, is_superuser=True)
         coordinator = Coordinator.objects.create(usp_number='1234567', user=user)
         teacher = Teacher.objects.create(usp_number='1234567', user=user)
 

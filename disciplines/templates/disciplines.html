@@ -36,7 +36,7 @@
                                         <span class="fas fa-eye"></span>
                                     </a>
                                     |
-                                    <a title="Gerenciar Atividades" href="{% url 'activities_list' discipline.pk %}">
+                                    <a title="Gerenciar Atividades" id='manage-activities-{{ discipline.pk }}' href="{% url 'activities_list' discipline.pk %}">
                                         <span class="fas fa-list-ul"></span>
                                     </a>
                                     {% if user.is_superuser %}
