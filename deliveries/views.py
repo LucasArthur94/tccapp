@@ -79,7 +79,7 @@ def deliveries_review(request, activity_id, id):
 
     workgroup = Workgroup.objects.filter(Q(guest=request.user) | Q(advisor=request.user)).order_by('-created_at').first()
 
-    if not workgroup or (delivery.is_avaliated_by_advisor and not hasattr(request.user, 'teacher')):
+    if not workgroup or (delivery.is_avaliated_by_advisor() and not hasattr(request.user, 'teacher')):
         return render(request, 'statuses/401.html')
 
     advisors_guests_deliveries_form = AdvisorsGuestsDeliveriesForm(request.POST or None, instance=delivery)
