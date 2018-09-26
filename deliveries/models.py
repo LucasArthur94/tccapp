@@ -88,4 +88,4 @@ class Delivery(models.Model):
         return self.status == 'AAD'
 
     def is_avaliated(self):
-        return self.is_avaliated_by_guest or self.is_avaliated_by_advisor
+        return self.status == 'AGS' or self.status == 'AAD'

@@ -14,7 +14,7 @@ class NewDisciplineTestCase(StaticLiveServerTestCase):
         self.browser = Chrome()
         self.browser.implicitly_wait(10)
 
-        user = User.objects.create_user(username='admin@poli.usp.br', name="Administrador Teste", email='admin@poli.usp.br', password='tccpoliusp', is_staff=True, is_superuser=True)
+        user = User.objects.create_user(username='admin@poli.usp.br', name="Administrador Teste", email='admin@poli.usp.br', password='1234567', is_staff=True, is_superuser=True)
         coordinator = Coordinator.objects.create(usp_number='1234567', user=user)
         teacher = Teacher.objects.create(usp_number='1234567', user=user)
         student_user = User.objects.create(username='aluno@poli.usp.br', name="Aluno Teste", email='aluno@poli.usp.br', password='7654321')
@@ -22,7 +22,7 @@ class NewDisciplineTestCase(StaticLiveServerTestCase):
 
         self.browser.get('%s%s' % (self.live_server_url, reverse_lazy("login")))
         self.browser.find_element_by_id('id_username').send_keys('admin@poli.usp.br')
-        self.browser.find_element_by_id('id_password').send_keys('tccpoliusp')
+        self.browser.find_element_by_id('id_password').send_keys('1234567')
         self.browser.find_element_by_id('login').click()
 
     def tearDown(self):
@@ -38,8 +38,8 @@ class NewDisciplineTestCase(StaticLiveServerTestCase):
         self.browser.find_element_by_class_name("select2-search__field").send_keys('aluno')
         self.browser.find_element_by_class_name("select2-results__option").click()
 
-        self.browser.find_element_by_id('id_start_date').send_keys('01012018')
-        self.browser.find_element_by_id('id_end_date').send_keys('30042018')
+        self.browser.find_element_by_id('id_start_date').send_keys('01/01/2018')
+        self.browser.find_element_by_id('id_end_date').send_keys('30/04/2018')
 
         self.browser.find_element_by_id('submit').click()
 

@@ -27,15 +27,17 @@
                         Arquivo Secundário: <a href="{{ delivery.main_file.url }}" target="_blank">{{ activity.main_file_name }}</a>
                         <br />
                     {% endif %}
-                    Comentários: <strong>{{ delivery.public_comments }}</strong>
-                    <br />
+                    {% if delivery.is_avaliated %}
+                        Comentários: <strong>{{ delivery.public_comments }}</strong>
+                        <br />
+                    {% endif %}
                     {% if user.coordinator or user.teacher or user.guest %}
                         {% if delivery.is_avaliated %}
+                            Comentários para Coordenação: <strong>{{ delivery.private_comments }}</strong>
+                            <br />
                             Nota: <strong>{{ delivery.score }}</strong>
                             <br />
                         {% endif %}
-                        Comentários para Coordenação: <strong>{{ delivery.private_comments }}</strong>
-                        <br />
                     {% endif %}
                 </div>
             </div>
