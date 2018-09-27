@@ -27,7 +27,7 @@
                                         <br />
                                     {% endif %}
                                     {% if activity.side_file_required %}
-                                        Arquivo Secundário: <a href="{{ delivery.main_file.url }}" target="_blank">{{ activity.main_file_name }}</a>
+                                        Arquivo Secundário: <a href="{{ delivery.side_file.url }}" target="_blank">{{ activity.side_file_name }}</a>
                                         <br />
                                     {% endif %}
                                     {% if delivery.is_avaliated and not user.student %}
