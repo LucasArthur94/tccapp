@@ -1,5 +1,6 @@
 import xlrd
 
+from django.conf import settings
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.core.mail import EmailMessage
@@ -7,7 +8,7 @@ from django.template.loader import render_to_string
 from users.forms import UsersForm, StudentsForm
 
 def send_welcome_mail(user):
-    data = {'name': user.name, 'appurl': 'https://tccapp-next-release.herokuapp.com'}
+    data = {'name': user.name, 'appurl': settings.RUNNING_DOMAIN}
     html_email = render_to_string('users/emails/new_user.html', data)
 
     email = EmailMessage(

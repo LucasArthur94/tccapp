@@ -30,7 +30,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['tccapp-next-release.herokuapp.com', 'tccapp-staging.herokuapp.com', 'localhost']
 
-RUNNING_DOMAIN = config('RUNNING_DOMAIN', default='localhost')
+RUNNING_DOMAIN = config('RUNNING_DOMAIN', default='http://localhost:8000')
 
 # Application definition
 
