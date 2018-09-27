@@ -52,8 +52,8 @@
                                     <a title="Ver mais" href="{% url 'workgroups_show' workgroup.pk %}">
                                         <span class="fas fa-eye"></span>
                                     </a>
-                                    |
                                     {% if user.is_superuser %}
+                                        |
                                         <a title="Editar" href="{% url 'workgroups_update' workgroup.pk %}">
                                             <span class="fas fa-user-edit"></span>
                                         </a>
