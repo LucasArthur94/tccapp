@@ -58,10 +58,10 @@
                                             <span class="fas fa-user-edit"></span>
                                         </a>
                                         |
+                                        <a title="Apagar" href="{% url 'workgroups_delete' workgroup.pk %}">
+                                            <span class="fas fa-trash-alt"></span>
+                                        </a>
                                     {% endif %}
-                                    <a title="Apagar" href="{% url 'workgroups_delete' workgroup.pk %}">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
                                 </th>
                             </tr>
                         {% endfor %}
