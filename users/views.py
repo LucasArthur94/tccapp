@@ -68,6 +68,9 @@ def teachers_delete(request, id):
 
     teacher = get_object_or_404(Teacher, pk=id)
 
+    if request.user.email == teacher.user.email:
+        return render(request, 'statuses/401.html')
+
     if request.method == 'POST':
         teacher.user.delete()
         teacher.delete()
@@ -137,6 +140,9 @@ def students_delete(request, id):
         return render(request, 'statuses/401.html')
 
     student = get_object_or_404(Student, pk=id)
+
+    if request.user.email == student.user.email:
+        return render(request, 'statuses/401.html')
 
     if request.method == 'POST':
         student.user.delete()
@@ -223,6 +229,9 @@ def guests_delete(request, id):
         return render(request, 'statuses/401.html')
 
     guest = get_object_or_404(Guest, pk=id)
+
+    if request.user.email == guest.user.email:
+        return render(request, 'statuses/401.html')
 
     if request.method == 'POST':
         guest.user.delete()
