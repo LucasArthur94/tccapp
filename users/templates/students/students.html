@@ -29,10 +29,12 @@
                                     <a title="Editar" href="{% url 'students_update' student.pk %}">
                                         <span class="fas fa-user-edit"></span>
                                     </a>
-                                    |
-                                    <a title="Apagar" href="{% url 'students_delete' student.pk %}">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
+                                    {% if student.user.email != user.email %}
+                                        |
+                                        <a title="Apagar" href="{% url 'students_delete' student.pk %}">
+                                            <span class="fas fa-trash-alt"></span>
+                                        </a>
+                                    {% endif %}
                                 </th>
                             </tr>
                         {% endfor %}

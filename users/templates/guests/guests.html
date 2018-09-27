@@ -29,10 +29,12 @@
                                     <a title="Editar" href="{% url 'guests_update' guest.pk %}">
                                         <span class="fas fa-user-edit"></span>
                                     </a>
-                                    |
-                                    <a title="Apagar" href="{% url 'guests_delete' guest.pk %}">
-                                        <span class="fas fa-trash-alt"></span>
-                                    </a>
+                                    {% if guest.user.email != user.email %}
+                                        |
+                                        <a title="Apagar" href="{% url 'guests_delete' guest.pk %}">
+                                            <span class="fas fa-trash-alt"></span>
+                                        </a>
+                                    {% endif %}
                                 </th>
                             </tr>
                         {% endfor %}
