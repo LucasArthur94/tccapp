@@ -15,7 +15,11 @@
                                 <div class="card-header danger-color lighten-1 white-text">Status: Não avaliada</div>
                             {% endif %}
                             <div class="card-body">
+                                Atividade: <strong>{{ delivery.activity.name }}</strong>
+                                <br />
                                 Autor: <strong>{{ delivery.author.name }}</strong>
+                                <br />
+                                Grupo de Trabalho: <strong>{{ delivery.workgroup.title }}</strong>
                                 <br />
                                 Data da Submissão: <strong>{{ delivery.submission_date }}</strong>
                                 <br />
@@ -24,7 +28,7 @@
                                     <br />
                                 {% endif %}
                                 {% if delivery.activity.side_file_required %}
-                                    Arquivo Secundário: <a href="{{ delivery.main_file.url }}" target="_blank">{{ delivery.activity.main_file_name }}</a>
+                                    Arquivo Secundário: <a href="{{ delivery.side_file.url }}" target="_blank">{{ delivery.activity.side_file_name }}</a>
                                     <br />
                                 {% endif %}
                                 {% if delivery.status != 'NAV' %}
