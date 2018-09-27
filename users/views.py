@@ -175,7 +175,7 @@ def students_new_bulk(request):
 
         xls_jupiter_parser(new_students_xls)
 
-        return redirect('disciplines_new')
+        return redirect('students_list')
     return render(request, 'students/new_bulk_form.html', {'student_bulk_register_form': student_bulk_register_form})
 
 # Guest views
