@@ -16,9 +16,10 @@ def home(request):
 
     elif hasattr(request.user, 'student'):
         discipline = Discipline.objects.filter(users__in=[request.user]).order_by('-end_date').first()
-        activities = Activity.objects.filter(discipline__id=discipline.pk)
 
-        return render(request, 'home.html', {'activities': activities, 'discipline_id': discipline.pk})
+        if discipline:
+            activities = Activity.objects.filter(discipline__id=discipline.pk)
+            return render(request, 'home.html', {'activities': activities, 'discipline_id': discipline.pk})
 
     return render(request, 'home.html')
 
