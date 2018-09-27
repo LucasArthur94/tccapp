@@ -45,8 +45,10 @@
                 <br />
                 <h2 class='text-center'>Sem docentes cadastrados!</h2>
             {% endif %}
-            <a href="{% url 'teachers_new' %}" id="new-teacher" class="btn btn-primary float-right"> Novo Docente</a>
-            <div class="clearfix"></div>
+            {% if user.coordinator %}
+                <a href="{% url 'teachers_new' %}" id="new-teacher" class="btn btn-primary float-right"> Novo Docente</a>
+                <div class="clearfix"></div>
+            {% endif %}
         </div>
     </div>
 
