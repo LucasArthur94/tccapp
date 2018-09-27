@@ -8,6 +8,9 @@ from .utils import xls_jupiter_parser, send_welcome_mail
 
 @login_required
 def teachers_list(request):
+    if not request.user.is_superuser:
+        return render(request, 'statuses/401.html')
+
     teachers = Teacher.objects.all()
     return render(request, 'teachers/teachers.html', {'teachers': teachers})
 
@@ -38,6 +41,9 @@ def teachers_new(request):
 
 @login_required
 def teachers_show(request, id):
+    if not request.user.is_superuser:
+        return render(request, 'statuses/401.html')
+
     teacher = get_object_or_404(Teacher, pk=id)
 
     return render(request, 'teachers/teacher_show.html', {'teacher': teacher})
@@ -82,6 +88,9 @@ def teachers_delete(request, id):
 
 @login_required
 def students_list(request):
+    if not request.user.is_superuser:
+        return render(request, 'statuses/401.html')
+
     students = Student.objects.all()
     return render(request, 'students/students.html', {'students': students})
 
@@ -111,6 +120,9 @@ def students_new(request):
 
 @login_required
 def students_show(request, id):
+    if not request.user.is_superuser:
+        return render(request, 'statuses/401.html')
+
     student = get_object_or_404(Student, pk=id)
 
     return render(request, 'students/student_show.html', {'student': student})
@@ -170,6 +182,9 @@ def students_new_bulk(request):
 
 @login_required
 def guests_list(request):
+    if not request.user.is_superuser:
+        return render(request, 'statuses/401.html')
+
     guests = Guest.objects.all()
     return render(request, 'guests/guests.html', {'guests': guests})
 
@@ -200,6 +215,9 @@ def guests_new(request):
 
 @login_required
 def guests_show(request, id):
+    if not request.user.is_superuser:
+        return render(request, 'statuses/401.html')
+
     guest = get_object_or_404(Guest, pk=id)
 
     return render(request, 'guests/guest_show.html', {'guest': guest})

@@ -59,8 +59,10 @@
                 <br />
                 <h2 class='text-center'>Sem disciplinas cadastradas!</h2>
             {% endif %}
-            <a href="{% url 'disciplines_new' %}" id="new-discipline" class="btn btn-primary float-right"> Nova Disciplina</a>
-            <div class="clearfix"></div>
+            {% if user.coordinator %}
+                <a href="{% url 'disciplines_new' %}" id="new-discipline" class="btn btn-primary float-right"> Nova Disciplina</a>
+                <div class="clearfix"></div>
+            {% endif %}
         </div>
     </div>
 
