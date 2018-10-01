@@ -6,7 +6,7 @@
             "name": "Paulo Sérgio Cugnasca",
             "email": "cugnasca@usp.br",
             "username": "cugnasca@usp.br",
-            "password": "pbkdf2_sha256$120000$oqxeqBnBOvLh$nhhUnZ2x7RW+pOIvFsdfaaOKLDSJl4fRRkXPv7qSSXw=",
+            "password": "pbkdf2_sha256$120000$8QjllqGqLijg$X6z3pZe9VP1IsL/mrrSSrWzfymSqZ21+Ssy911EsMA8=",
             "is_staff": true,
             "is_superuser": true
         }
@@ -38,7 +38,7 @@
             "name": "João Batista Camargo Junior",
             "email": "joaocamargo@usp.br",
             "username": "joaocamargo@usp.br",
-            "password": "pbkdf2_sha256$120000$q2emjtA7TkCI$ru+iJ35TRUcCEqFdQ4T7N4NJRXFW9mxOL6Mpj7h5U24=",
+            "password": "pbkdf2_sha256$120000$AaLXUUtjwTm1$x6Lml6UCWDbW5/NFFuHBFBtKVHBLAc3ZukzHZFkHaL8=",
             "is_staff": true,
             "is_superuser": true
         }
