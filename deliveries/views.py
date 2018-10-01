@@ -86,9 +86,9 @@ def deliveries_review(request, activity_id, id):
 
     if advisors_guests_deliveries_form.is_valid():
         new_delivery = advisors_guests_deliveries_form.save(commit=False)
-        if hasattr(request.user, 'guest'):
+        if request.user == workgroup.guest:
             new_delivery.status = 'AGS'
-        elif hasattr(request.user, 'teacher'):
+        elif request.user == workgroup.advisor:
             new_delivery.status = 'AAD'
         new_delivery.save()
 
