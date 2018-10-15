@@ -9,7 +9,7 @@ from django_select2.forms import ModelSelect2Widget, ModelSelect2MultipleWidget
 class WorkgroupsForm(ModelForm):
     class Meta:
         model = Workgroup
-        fields = ['title', 'students', 'advisor', 'guest']
+        fields = ['modality', 'identifier', 'title', 'students', 'advisor', 'guest']
         labels = {
             'modality': _('Modalidade'),
             'identifier': _('Número do Grupo'),
