@@ -6,9 +6,25 @@ from users.models import User
 # Create your models here.
 
 class Workgroup(models.Model):
-    # Required fields
-    REQUIRED_FIELDS = ('title', 'students', 'advisor', 'advisor_validated_participation')
+    SEMESTER = 'SMS'
+    QUARTELY = 'QDR'
 
+    MODALITY_CHOICES = (
+        (SEMESTER, 'Semestral'),
+        (QUARTELY, 'Quadrimestral'),
+    )
+
+    # Required fields
+    REQUIRED_FIELDS = ('modality', 'identifier', 'title', 'students', 'advisor', 'advisor_validated_participation')
+
+    modality = models.CharField(
+        max_length=3,
+        choices=MODALITY_CHOICES,
+        default=QUARTELY
+    )
+    identifier = models.IntegerField(
+        default=1
+    )
     title = models.CharField(
         max_length=100,
     )
@@ -27,3 +43,11 @@ class Workgroup(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
+
+    # Workgroup methods
+    def complete_identifier(self):
+        if self.modality == 'SMS':
+            return 'S' + str(self.identifier)
+        elif self.modality == 'QDR':
+            return 'C' + str(self.identifier)
+        return None
