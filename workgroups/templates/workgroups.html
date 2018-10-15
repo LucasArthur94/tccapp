@@ -9,6 +9,7 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th scope="col">Identificador do Grupo</th>
                                 <th scope="col">Título</th>
                                 <th scope="col">Quantidade de Alunos</th>
                                 <th scope="col">Orientador</th>
@@ -19,6 +20,7 @@
                         <tbody>
                         {% for workgroup in workgroups %}
                             <tr>
+                                <th>{{ workgroup.complete_identifier }}</th>
                                 <th>{{ workgroup.title }}</th>
                                 <th>{{ workgroup.students.count }}</th>
                                 <th>{{ workgroup.advisor.name }}</th>

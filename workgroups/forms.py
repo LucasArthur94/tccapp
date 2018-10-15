@@ -11,6 +11,8 @@ class WorkgroupsForm(ModelForm):
         model = Workgroup
         fields = ['title', 'students', 'advisor', 'guest']
         labels = {
+            'modality': _('Modalidade'),
+            'identifier': _('Número do Grupo'),
             'title': _('Título do Tema'),
             'students': _('Alunos'),
             'advisor': _('Orientador'),
