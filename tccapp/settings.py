@@ -189,4 +189,9 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
 
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='tcc@poli.usp.br')
 
+GRAPH_MODELS = {
+    'all_applications': True,
+    'group_models': True,
+}
+
 django_heroku.settings(locals())
