@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-center">Salas</h3>
+            <br />
+            {% if rooms|length > 0 %}
+                <div class="row">
+                    {% for room in rooms %}
+                        <div class="col-lg-2">
+                            <div class="card">
+                                <div class="card-body elegant-color white-text rounded-bottom">
+                                    <a title="Ver mais" class="white-text" href="{% url 'rooms_show' room.pk %}">
+                                        <strong>{{ room.block }}{{ room.floor }}-{{ room.identifier }}</strong>
+                                    </a>
+                                    <a title="Apagar Sala" class="white-text float-right" href="{% url 'rooms_delete' room.pk %}">
+                                        <span class="fas fa-trash"></span>
+                                    </a>
+                                    <span class="float-right">|</span>
+                                    <a title="Editar Sala" class="white-text float-right" href="{% url 'rooms_update' room.pk %}">
+                                        <span class="fas fa-edit"></span>
+                                    </a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <br />
+                <h2 class='text-center'>Ainda não há salas no sistema!</h2>
+            {% endif %}
+            <br />
+            <a href="{% url 'rooms_new' %}" id="new-room" class="btn btn-primary float-right"> Nova Sala</a>
+            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'home' %}" role="button">
+                Voltar
+            </a>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+{% endblock %}

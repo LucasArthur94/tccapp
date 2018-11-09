@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="text-center">Informações da Sala</h3>
+            <br />
+            <div class="card">
+                <div class="card-header success-color lighten-1 white-text">{{ room.block }}{{ room.floor }}-{{ room.identifier }}</div>
+                <div class="card-body">
+                    Bloco: <strong>{{ room.block }}</strong>
+                    <br />
+                    Andar:
+                    {% if room.floor == 'T' %}
+                        <strong>Térreo</strong>
+                    {% else %}
+                        <strong>{{ room.floor }}º</strong>
+                    {% endif %}
+                    <br />
+                    Identificador da Sala: <strong>{{ room.identifier }}</strong>
+                    <br />
+                </div>
+            </div>
+            <br />
+            <a class="btn btn-primary btn-block waves-effect" href="{% url 'rooms_list' %}" role="button">
+                Voltar
+            </a>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+
+{% endblock %}
