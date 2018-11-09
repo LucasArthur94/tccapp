@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'gdstorage',
     'import_export',
     'bootstrapform',
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
     'activities',
     'workgroups',
     'deliveries',
+    'rooms'
 ]
 
 MIDDLEWARE = [
@@ -187,5 +189,10 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
 
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='tcc@poli.usp.br')
+
+GRAPH_MODELS = {
+    'all_applications': True,
+    'group_models': True,
+}
 
 django_heroku.settings(locals())
