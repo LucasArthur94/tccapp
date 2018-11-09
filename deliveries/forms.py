@@ -8,8 +8,9 @@ class StudentsDeliveriesForm(ModelForm):
         model = Delivery
         fields = ['main_file', 'side_file']
         labels = {
-            'main_file': ('Arquivo Principal'),
-            'side_file': ('Arquivo Extra'),
+            'main_file': _('Arquivo Principal'),
+            'side_file': _('Arquivo Extra'),
+            'submission_comments': _('Comentários da Entrega')
         }
 
     def __init__(self, activity=None, *args, **kwargs):

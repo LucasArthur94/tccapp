@@ -28,6 +28,7 @@ class Delivery(models.Model):
         'main_file',
         'side_file',
         'status',
+        'submission_comments',
         'public_comments',
         'private_comments',
         'score',
@@ -53,6 +54,10 @@ class Delivery(models.Model):
         max_length=3,
         choices=DELIVERY_STATUSES,
         default=NOT_AVALIATED
+    )
+    submission_comments = models.TextField(
+        max_length=500,
+        default='',
     )
     public_comments = models.TextField(
         max_length=500,

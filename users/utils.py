@@ -31,7 +31,12 @@ def xls_jupiter_parser(new_students_xls):
         usp_number = student_info[0].value
         email = student_info[4].value
 
-        if email and not '(P) ' in usp_number and not '(I) ' in usp_number:
+        if email:
+            if '(P) ' in usp_number or '(I) ' in usp_number:
+                definitive_usp_number = usp_number[4:]
+            else:
+                definitive_usp_number = usp_number
+
             user_dict = {}
 
             user_dict['email'] = email
@@ -40,13 +45,13 @@ def xls_jupiter_parser(new_students_xls):
             users_form = UsersForm(user_dict)
 
             student_dict = {}
-            student_dict['usp_number'] = usp_number
+            student_dict['usp_number'] = definitive_usp_number
             students_form = StudentsForm(student_dict)
 
             if users_form.is_valid() and students_form.is_valid():
                 recent_user = users_form.save(commit=False)
                 recent_user.username = recent_user.email
-                recent_user.set_password(usp_number)
+                recent_user.set_password(definitive_usp_number)
                 recent_user.save()
 
                 recent_student = students_form.save(commit=False)
