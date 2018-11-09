@@ -27,6 +27,8 @@
                         Arquivo Secundário: <a href="{{ delivery.side_file.url }}" target="_blank">{{ activity.side_file_name }}</a>
                         <br />
                     {% endif %}
+                    Comentários da Entrega: <strong>{{ delivery.submission_comments }}</strong>
+                    <br />
                     {% if delivery.is_avaliated %}
                         Comentários: <strong>{{ delivery.public_comments }}</strong>
                         <br />
