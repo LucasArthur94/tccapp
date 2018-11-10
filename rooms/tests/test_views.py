@@ -9,7 +9,7 @@ from selenium.webdriver.common.keys import Keys
 from users.models import User, Coordinator, Teacher, Student
 
 @override_settings(DEBUG=True)
-class NewDisciplineTestCase(StaticLiveServerTestCase):
+class NewRoomTestCase(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = Chrome()
         self.browser.implicitly_wait(10)
