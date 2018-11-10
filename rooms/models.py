@@ -38,3 +38,7 @@ class Room(models.Model):
     identifier = models.CharField(
         max_length=2,
     )
+
+    # Room methods
+    def full_identifier(self):
+        return self.block + self.floor + "-" + self.identifier
