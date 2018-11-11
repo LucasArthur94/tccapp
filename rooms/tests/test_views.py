@@ -17,8 +17,6 @@ class NewRoomTestCase(StaticLiveServerTestCase):
         user = User.objects.create_user(username='admin@poli.usp.br', name="Administrador Teste", email='admin@poli.usp.br', password='1234567', is_staff=True, is_superuser=True)
         coordinator = Coordinator.objects.create(usp_number='1234567', user=user)
         teacher = Teacher.objects.create(usp_number='1234567', user=user)
-        student_user = User.objects.create(username='aluno@poli.usp.br', name="Aluno Teste", email='aluno@poli.usp.br', password='7654321')
-        student = Student.objects.create(usp_number='7654321', user=student_user)
 
         self.browser.get('%s%s' % (self.live_server_url, reverse_lazy("login")))
         self.browser.find_element_by_id('id_username').send_keys('admin@poli.usp.br')
