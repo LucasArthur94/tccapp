@@ -1,0 +1,20 @@
+[
+    {
+        "model": "rooms.room",
+        "pk": 1,
+        "fields": {
+            "block": "A",
+            "floor": "T",
+            "identifier": "AT",
+        }
+    },
+    {
+        "model": "rooms.room",
+        "pk": 2,
+        "fields": {
+            "block": "A",
+            "floor": "T",
+            "identifier": "ST",
+        }
+    }
+]
