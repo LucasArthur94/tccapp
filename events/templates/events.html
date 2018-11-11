@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-center">Eventos de Avaliação</h3>
+            <br />
+            {% if events|length > 0 %}
+                <div class="row">
+                    {% for event in events %}
+                        <div class="col-lg-4">
+                            <div class="card">
+                                {% if event.is_closed %}
+                                    <div class="card-header danger-color lighten-1 white-text">Evento Encerrado</div>
+                                {% else %}
+                                    <div class="card-header success-color lighten-1 white-text">Evento Aberto</div>
+                                {% endif %}
+                                <div class="card-body">
+                                    Tipo do Evento: <strong>{{ event.event_type }}</strong>
+                                    <br />
+                                    Data de Início: <strong>{{ event.start_time }}</strong>
+                                    <br />
+                                    Data de Término: <strong>{{ event.end_time }}</strong>
+                                    <br />
+                                    <br />
+                                    <div class="btn-group float-right" role="group" aria-label="Event home operations">
+                                        <a href="{% url 'events_show' event.pk %}" class="btn btn-info btn-sm">
+                                            <strong>Ver mais</strong>
+                                        </a>
+                                        <br />
+                                        <a href="{% url 'events_update' event.pk %}" class="btn btn-primary btn-sm">
+                                            <strong>Editar</strong>
+                                        </a>
+                                        <br />
+                                        <a href="{% url 'events_delete' event.pk %}" class="btn btn-danger btn-sm">
+                                            <strong>Apagar</strong>
+                                        </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <br />
+                <h2 class='text-center'>Sem eventos cadastrados!</h2>
+            {% endif %}
+            <br />
+            <a href="{% url 'events_new' %}" id="new-event" class="btn btn-primary float-right"> Novo Evento</a>
+            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'home' %}" role="button">
+                Voltar
+            </a>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+{% endblock %}
