@@ -3,34 +3,36 @@
 {% block main %}
     <div class="row">
         <div class="col-lg-12">
-            <h3 class="text-center">Atividades da Disciplina</h3>
+            <h3 class="text-center">Grupos Alocados do Evento</h3>
             <br />
             {% if allocations|length > 0 %}
                 <div class="row">
                     {% for allocation in allocations %}
                         <div class="col-lg-4">
                             <div class="card">
-                                {% if allocation.is_closed %}
-                                    <div class="card-header danger-color lighten-1 white-text">{{ allocation.name }} - Fechada</div>
-                                {% else %}
-                                    <div class="card-header success-color lighten-1 white-text">{{ allocation.name }} - Aberta</div>
-                                {% endif %}
+                                <div class="card-header info-color lighten-1 white-text">Grupo {{ allocation.workgroup.complete_identifier }} - Sala {{ allocation.selected_room.full_identifier }}</div>
                                 <div class="card-body">
-                                    Data Limite: <strong>{{ allocation.due_date }}</strong>
+                                    Horário: <strong>{{ allocation.start_time }} - {{ allocation.end_time }}</strong>
                                     <br />
+                                    Avaliadores:
+                                    <ul>
+                                    {% for evaluator in allocation.evaluators.all %}
+                                        <li><strong>{{ evaluator.name }}</strong></li>
+                                    {% endfor %}
+                                    </ul>
                                     <br />
-                                    <div class="btn-group float-right" role="group" aria-label="Activity home operations">
-                                        {% if not allocation.is_closed and user.student %}
-                                            <a href="{% url 'deliveries_new' allocation.id %}" class="btn btn-default btn-sm">
-                                                <strong>Realizar Entrega</strong>
+                                    <div class="btn-group float-right" role="group" aria-label="Allocation home operations">
+                                        {% if not allocation.is_closed and (user.guest or user.teacher) %}
+                                            <a href="{% url 'avaliations_new' allocation.id %}" class="btn btn-default btn-sm">
+                                                <strong>Avaliar</strong>
                                             </a>
                                             <br />
                                         {% endif %}
-                                        <a href="{% url 'deliveries_list' allocation.id %}" class="btn btn-warning btn-sm"> <strong>Ver Entregas</strong></a>
+                                        <a href="{% url 'avaliations_list' allocation.id %}" class="btn btn-warning btn-sm"> <strong>Ver Avaliações</strong></a>
                                     </div>
                                     <br />
                                     <br />
-                                    <div class="btn-group float-right" role="group" aria-label="Activity home operations">
+                                    <div class="btn-group float-right" role="group" aria-label="Allocation home operations">
                                         {% if user.coordinator %}
                                             <a href="{% url 'allocations_show' event_id allocation.pk %}" class="btn btn-info btn-sm">
                                                 <strong>Ver mais</strong>
@@ -53,7 +55,7 @@
                 </div>
             {% else %}
                 <br />
-                <h2 class='text-center'>Sem atividades cadastradas nesta disciplina!</h2>
+                <h2 class='text-center'>Não há grupos alocados neste evento!</h2>
             {% endif %}
             <br />
             {% if user.coordinator %}
