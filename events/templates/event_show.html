@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="text-center">Informações do Evento</h3>
+            <br />
+            <div class="card">
+                <div class="card-header primary-color lighten-1 white-text">Tipo do Evento: {{ event.event_type }}</div>
+                <div class="card-body">
+                    Data do Evento: <strong>{{ event.selected_date }}</strong>
+                    <br />
+                    Horário de Início: <strong>{{ event.start_time }}</strong>
+                    <br />
+                    Horário de Término: <strong>{{ event.end_time }}</strong>
+                    <br />
+                    Peso: <strong>{{ event.weight }}</strong>
+                </div>
+            </div>
+            <br />
+            <a class="btn btn-primary btn-block waves-effect" href="{% url 'events_list' %}" role="button">
+                Voltar
+            </a>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+
+{% endblock %}

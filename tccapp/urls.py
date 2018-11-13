@@ -24,6 +24,8 @@ from home import urls as home_urls
 from users import urls as users_urls
 from workgroups import urls as workgroups_urls
 from rooms import urls as rooms_urls
+from events import urls as events_urls
+from allocations import urls as allocations_urls
 
 urlpatterns = [
     # path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
@@ -35,6 +37,8 @@ urlpatterns = [
     path('deliveries/<int:activity_id>/', include(deliveries_urls), name='deliveries'),
     path('workgroups/', include(workgroups_urls), name='workgroups'),
     path('rooms/', include(rooms_urls), name='rooms'),
+    path('events/', include(events_urls), name='events'),
+    path('allocations/<int:event_id>/', include(allocations_urls), name='allocations'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('admin/', admin.site.urls),
     path('select2/', include(django_select2_urls)),
