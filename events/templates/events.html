@@ -11,18 +11,27 @@
                         <div class="col-lg-4">
                             <div class="card">
                                 {% if event.is_closed %}
-                                    <div class="card-header danger-color lighten-1 white-text">Evento Encerrado</div>
+                                    <div class="card-header danger-color lighten-1 white-text">Evento Encerrado - {{ event.selected_date }}</div>
                                 {% else %}
-                                    <div class="card-header success-color lighten-1 white-text">Evento Aberto</div>
+                                    <div class="card-header success-color lighten-1 white-text">Evento Aberto - {{ event.selected_date }}</div>
                                 {% endif %}
                                 <div class="card-body">
                                     Tipo do Evento: <strong>{{ event.event_type }}</strong>
                                     <br />
-                                    Data de Início: <strong>{{ event.start_time }}</strong>
+                                    Horário de Início: <strong>{{ event.start_time }}</strong>
                                     <br />
-                                    Data de Término: <strong>{{ event.end_time }}</strong>
+                                    Horário de Término: <strong>{{ event.end_time }}</strong>
                                     <br />
                                     <br />
+                                    {% if not event.is_closed_event %}
+                                        <div class="btn-group float-right" role="group" aria-label="Event home operations">
+                                            <a href="{% url 'allocations_list' event.pk %}" class="btn btn-success btn-sm">
+                                                <strong>Alocar grupos</strong>
+                                            </a>
+                                        </div>
+                                        <br />
+                                        <br />
+                                    {% endif %}
                                     <div class="btn-group float-right" role="group" aria-label="Event home operations">
                                         <a href="{% url 'events_show' event.pk %}" class="btn btn-info btn-sm">
                                             <strong>Ver mais</strong>

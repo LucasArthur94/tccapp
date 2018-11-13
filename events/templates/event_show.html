@@ -7,11 +7,13 @@
             <h3 class="text-center">Informações do Evento</h3>
             <br />
             <div class="card">
-                <div class="card-header primary-color lighten-1 white-text">{{ event.event_type }}</div>
+                <div class="card-header primary-color lighten-1 white-text">Tipo do Evento: {{ event.event_type }}</div>
                 <div class="card-body">
-                    Data de Início: <strong>{{ event.start_time }}</strong>
+                    Data do Evento: <strong>{{ event.selected_date }}</strong>
                     <br />
-                    Data de Término: <strong>{{ event.end_time }}</strong>
+                    Horário de Início: <strong>{{ event.start_time }}</strong>
+                    <br />
+                    Horário de Término: <strong>{{ event.end_time }}</strong>
                     <br />
                     Peso: <strong>{{ event.weight }}</strong>
                 </div>

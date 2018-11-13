@@ -29,11 +29,11 @@ class Workgroup(models.Model):
         max_length=100,
     )
     students = models.ManyToManyField(User, related_name='students')
-    advisor = models.ForeignKey(User, related_name='workgroup_advisor',on_delete=models.CASCADE)
+    advisor = models.ForeignKey(User, related_name='workgroup_advisor', on_delete=models.CASCADE)
     advisor_validated_participation = models.BooleanField(
         default=False
     )
-    guest = models.ForeignKey(User, related_name='workgroup_guest',on_delete=models.CASCADE, null=True, blank=True)
+    guest = models.ForeignKey(User, related_name='workgroup_guest', on_delete=models.CASCADE, null=True, blank=True)
     guest_validated_participation = models.BooleanField(
         default=False
     )

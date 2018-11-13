@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from django.db import models
 from rooms.models import Room
 from disciplines.models import Discipline
@@ -14,15 +14,15 @@ class Event(models.Model):
     )
 
     # Required fields
-    REQUIRED_FIELDS = ('type', 'disciplines', 'free_rooms', 'selected_date', 'start_time', 'end_time', 'created_at', 'updated_at')
+    REQUIRED_FIELDS = ('type', 'quadrimestral_discipline', 'semester_discipline', 'selected_date', 'start_time', 'end_time', 'created_at', 'updated_at')
 
     type = models.CharField(
         max_length=3,
         choices=EVENT_TYPE_CHOICES,
         default=THEORETICAL
     )
-    disciplines = models.ManyToManyField(Discipline)
-    free_rooms = models.ManyToManyField(Room)
+    quarter_discipline = models.ForeignKey(Discipline, related_name='event_quarter_discipline', on_delete=models.CASCADE)
+    semester_discipline = models.ForeignKey(Discipline, related_name='event_semester_discipline', on_delete=models.CASCADE)
     selected_date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
@@ -41,7 +41,7 @@ class Event(models.Model):
         return self.end_time > self.start_time
 
     def is_retroative_time(self):
-        return self.end_time < date.today()
+        return self.end_time < datetime.now()
 
     def event_type(self):
         if self.type == self.THEORETICAL:
@@ -50,3 +50,6 @@ class Event(models.Model):
             return 'Feira Prática'
         else:
             return 'Evento Indefinido'
+
+    def is_closed_event(self):
+        return self.selected_date < date.today()
