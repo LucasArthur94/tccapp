@@ -22,13 +22,13 @@
                                     </ul>
                                     <br />
                                     <div class="btn-group float-right" role="group" aria-label="Allocation home operations">
-                                        {% if not allocation.is_closed and (user.guest or user.teacher) %}
-                                            <a href="{% url 'avaliations_new' allocation.id %}" class="btn btn-default btn-sm">
+                                        {% if user in allocation.evaluators.all %}
+                                            <a href="{% url 'evaluations_new' allocation.id %}" class="btn btn-default btn-sm">
                                                 <strong>Avaliar</strong>
                                             </a>
                                             <br />
                                         {% endif %}
-                                        <a href="{% url 'avaliations_list' allocation.id %}" class="btn btn-warning btn-sm"> <strong>Ver Avaliações</strong></a>
+                                        <a href="{% url 'evaluations_list' allocation.id %}" class="btn btn-warning btn-sm"> <strong>Ver Avaliações</strong></a>
                                     </div>
                                     <br />
                                     <br />
