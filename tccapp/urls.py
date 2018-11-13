@@ -26,6 +26,7 @@ from workgroups import urls as workgroups_urls
 from rooms import urls as rooms_urls
 from events import urls as events_urls
 from allocations import urls as allocations_urls
+from evaluations import urls as evaluations_urls
 
 urlpatterns = [
     # path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
@@ -39,6 +40,7 @@ urlpatterns = [
     path('rooms/', include(rooms_urls), name='rooms'),
     path('events/', include(events_urls), name='events'),
     path('allocations/<int:event_id>/', include(allocations_urls), name='allocations'),
+    path('evaluations/<int:allocation_id>/', include(evaluations_urls), name='evaluations'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('admin/', admin.site.urls),
     path('select2/', include(django_select2_urls)),
