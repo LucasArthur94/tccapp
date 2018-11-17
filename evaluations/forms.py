@@ -1,39 +1,87 @@
-from django.forms import ModelForm, widgets
-from django.forms.widgets import HiddenInput
-from .models import Delivery
+from django.utils.safestring import mark_safe
+from django.core.exceptions import ValidationError
+from django.forms import ModelForm, ChoiceField
+from django.forms.widgets import RadioSelect
+from .models import Evaluation
 from django.utils.translation import gettext_lazy as _
 
-class StudentsDeliveriesForm(ModelForm):
+class TheoreticalEvaluationForm(ModelForm):
+    CHOICES=[('0','0 (Não recomendo)'), ('1','1'), ('2','2'), ('3','3'), ('4','4'), ('5','5 (Recomendo muito)')]
+    recommendation_for_best_project = ChoiceField(label = 'Recomenda para Melhor Projeto da Feira?', choices = CHOICES, widget = RadioSelect)
+
+
     class Meta:
-        model = Delivery
-        fields = ['main_file', 'side_file']
+        model = Evaluation
+        fields = ['recommendation_for_best_project', 'presentation', 'arguing', 'implementation', 'documentation', 'needs_fixes', 'private_comments']
         labels = {
-            'main_file': _('Arquivo Principal'),
-            'side_file': _('Arquivo Extra'),
-            'submission_comments': _('Comentários da Entrega')
+            'presentation': _('Nota da Apresentação (0,0 - 2,0)'),
+            'arguing': _('Nota da Arguição (0,0 - 2,0)'),
+            'implementation': _('Nota da Implementação (0,0 - 3,0)'),
+            'documentation': _('Nota da Documentação (0,0 - 3,0)'),
+            'needs_fixes': _('Necessita de Correções?'),
+            'private_comments': _('Comentários e Correções'),
         }
 
-    def __init__(self, activity=None, *args, **kwargs):
-        super(StudentsDeliveriesForm, self).__init__(*args, **kwargs)
-        if activity:
-            self.fields['main_file'].label = activity.main_file_name
-            self.fields['main_file'].required = activity.main_file_required
-            if not activity.main_file_required:
-                self.fields['main_file'].widget = HiddenInput()
+    def clean_presentation(self):
+        score = self.cleaned_data['presentation']
+        if score < 0.0 or score > 2.0:
+            raise ValidationError(u'Preencha uma nota válida!')
 
-            self.fields['side_file'].label = activity.side_file_name
-            self.fields['side_file'].required = activity.side_file_required
-            if not activity.side_file_required:
-                self.fields['side_file'].widget = HiddenInput()
+        return score
+
+    def clean_arguing(self):
+        score = self.cleaned_data['arguing']
+        if score < 0.0 or score > 2.0:
+            raise ValidationError(u'Preencha uma nota válida!')
+
+        return score
+
+    def clean_implementation(self):
+        score = self.cleaned_data['implementation']
+        if score < 0.0 or score > 3.0:
+            raise ValidationError(u'Preencha uma nota válida!')
+
+        return score
+
+    def clean_documentation(self):
+        score = self.cleaned_data['documentation']
+        if score < 0.0 or score > 3.0:
+            raise ValidationError(u'Preencha uma nota válida!')
+
+        return score
 
 
+class PracticalEvaluationForm(ModelForm):
+    CHOICES=[('0','0 (Não recomendo)'), ('1','1'), ('2','2'), ('3','3'), ('4','4'), ('5','5 (Recomendo muito)')]
+    recommendation_for_best_project = ChoiceField(label = 'Recomenda para Melhor Projeto da Feira?', choices = CHOICES, widget = RadioSelect)
 
-class AdvisorsGuestsDeliveriesForm(ModelForm):
     class Meta:
-        model = Delivery
-        fields = ['score', 'public_comments', 'private_comments']
+        model = Evaluation
+        fields = ['recommendation_for_best_project', 'presentation', 'arguing', 'implementation', 'private_comments']
         labels = {
-            'public_comments': ('Comentários Públicos'),
-            'private_comments': ('Comentários Privados'),
-            'score': ('Nota da Entrega'),
+            'presentation': _('Nota da Apresentação (0,0 - 2,0)'),
+            'arguing': _('Nota da Arguição (0,0 - 3,0)'),
+            'implementation': _('Nota da Implementação (0,0 - 5,0)'),
+            'private_comments': _('Correções Necessárias'),
         }
+
+    def clean_presentation(self):
+        score = self.cleaned_data['presentation']
+        if score < 0.0 or score > 2.0:
+            raise ValidationError(u'Preencha uma nota válida!')
+
+        return score
+
+    def clean_arguing(self):
+        score = self.cleaned_data['arguing']
+        if score < 0.0 or score > 3.0:
+            raise ValidationError(u'Preencha uma nota válida!')
+
+        return score
+
+    def clean_implementation(self):
+        score = self.cleaned_data['implementation']
+        if score < 0.0 or score > 5.0:
+            raise ValidationError(u'Preencha uma nota válida!')
+
+        return score

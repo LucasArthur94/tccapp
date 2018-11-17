@@ -23,10 +23,3 @@ class Allocation(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
-
-    # Allocation methods
-    def is_valid_time(self):
-        return self.end_time > self.start_time
-
-    def is_closed(self):
-        return self.end_time < datetime.now()

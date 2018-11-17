@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-center">Avaliações</h3>
+            <br />
+            {% if evaluations|length > 0 %}
+                <div class="row">
+                    {% for evaluation in evaluations %}
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header success-color lighten-1 white-text">{{ evaluation.owner.name }}</div>
+                                <div class="card-body">
+                                    Nota Final: <strong>{{ evaluation.sum }}</strong>
+                                    <br />
+                                    Recomenda para Premiação?: <strong>{{ evaluation.recommendation_for_best_project }}</strong>
+                                    <br />
+                                    <br />
+                                    <div class="btn-group float-right" role="group" aria-label="Evaluation home operations">
+                                        <a href="{% url 'evaluations_show' allocation.pk evaluation.pk %}" class="btn btn-info btn-sm">
+                                            <strong>Ver mais</strong>
+                                        </a>
+                                        <br />
+                                        {% if request.user.is_superuser or evaluation.owner == request.user and not allocation.event.is_closed %}
+                                            <a href="{% url 'evaluations_update' allocation.pk evaluation.pk %}" class="btn btn-primary btn-sm">
+                                                <strong>Editar</strong>
+                                            </a>
+                                            <br />
+                                        {% endif %}
+                                        {% if evaluation.owner == request.user and not allocation.event.is_closed %}
+                                            <a href="{% url 'evaluations_delete' allocation.pk evaluation.pk %}" class="btn btn-danger btn-sm">
+                                                <strong>Apagar</strong>
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <br />
+                <h2 class='text-center'>Ainda não há avaliações deste grupo!</h2>
+            {% endif %}
+            <br />
+            {% if user in allocation.evaluators.all and not allocation.event.is_closed and not previous_evaluation %}
+                <a href="{% url 'evaluations_new' allocation.pk %}" id="new-evaluation" class="btn btn-primary float-right"> Nova Avaliação</a>
+            {% endif %}
+            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'allocations_list' event_id %}" role="button">
+                Voltar
+            </a>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, time
 from django.db import models
 from rooms.models import Room
 from disciplines.models import Discipline
@@ -40,8 +40,8 @@ class Event(models.Model):
     def is_valid_time(self):
         return self.end_time > self.start_time
 
-    def is_retroative_time(self):
-        return self.end_time < datetime.now()
+    def is_closed(self):
+        return datetime.combine(self.selected_date, self.end_time) < datetime.now()
 
     def event_type(self):
         if self.type == self.THEORETICAL:
@@ -51,5 +51,8 @@ class Event(models.Model):
         else:
             return 'Evento Indefinido'
 
-    def is_closed_event(self):
-        return self.selected_date < date.today()
+    def is_theoretical(self):
+        return self.type == self.THEORETICAL
+
+    def is_practical(self):
+        return self.type == self.PRACTICAL

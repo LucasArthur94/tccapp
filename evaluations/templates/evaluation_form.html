@@ -3,12 +3,12 @@
 
 {% block main %}
     <div class='col-md-12'>
-        <h3 class='text-center'>Arquivos da Entrega</h3>
+        <h3 class='text-center'>Avaliar Trabalho</h3>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ advisors_guests_deliveries_form|bootstrap }}
+            {{ evaluations_form|bootstrap }}
             <button type="submit" id="submit" class="btn btn-primary float-right">Salvar</button>
-            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'activities_list' activity.pk %}" role="button">
+            <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'evaluations_list' allocation.pk %}" role="button">
                 Voltar
             </a>
             <div class="clearfix"></div>
