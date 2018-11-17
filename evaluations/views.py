@@ -39,9 +39,9 @@ def evaluations_new(request, allocation_id):
     if not allocation or request.user not in allocation.evaluators.all() or previous_evaluation or allocation.event.is_closed():
         return render(request, 'statuses/401.html')
 
-    if allocation.event.is_theoretical:
+    if allocation.event.is_theoretical():
         evaluations_form = TheoreticalEvaluationForm(request.POST or None, request.FILES or None)
-    elif allocation.event.is_practical:
+    elif allocation.event.is_practical():
         evaluations_form = PracticalEvaluationForm(request.POST or None, request.FILES or None)
     else:
         return render(request, 'statuses/401.html')

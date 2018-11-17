@@ -80,7 +80,8 @@ def deliveries_review(request, activity_id, id):
     workgroup = Workgroup.objects.filter(Q(guest=request.user) | Q(advisor=request.user)).order_by('-created_at').first()
 
     if not workgroup or (delivery.is_avaliated_by_advisor() and not hasattr(request.user, 'teacher')):
-        return render(request, 'statuses/401.html')
+        if not request.user.is_superuser:
+            return render(request, 'statuses/401.html')
 
     advisors_guests_deliveries_form = AdvisorsGuestsDeliveriesForm(request.POST or None, instance=delivery)
 
@@ -89,6 +90,8 @@ def deliveries_review(request, activity_id, id):
         if request.user == workgroup.guest:
             new_delivery.status = 'AGS'
         elif request.user == workgroup.advisor:
+            new_delivery.status = 'AAD'
+        else:
             new_delivery.status = 'AAD'
         new_delivery.save()
 

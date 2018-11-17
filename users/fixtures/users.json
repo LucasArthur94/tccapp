@@ -6,7 +6,7 @@
             "name": "Paulo Sérgio Cugnasca",
             "email": "cugnasca@usp.br",
             "username": "cugnasca@usp.br",
-            "password": "pbkdf2_sha256$120000$8QjllqGqLijg$X6z3pZe9VP1IsL/mrrSSrWzfymSqZ21+Ssy911EsMA8=",
+            "password": "pbkdf2_sha256$120000$cNYZHeNAijex$oucxwc6BFgg4zg1WkMJ5IHbhCwJoG2VEhMFYLV44fy0=",
             "is_staff": true,
             "is_superuser": true
         }

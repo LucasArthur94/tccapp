@@ -22,6 +22,7 @@ def allocations_new(request, event_id):
         new_allocation = allocations_form.save(commit=False)
         new_allocation.event_id = event_id
         new_allocation.save()
+        allocations_form.save_m2m()
 
         return redirect('allocations_list', event_id=event_id)
     return render(request, 'allocation_form.html', {'allocations_form': allocations_form, 'event_id': event_id})

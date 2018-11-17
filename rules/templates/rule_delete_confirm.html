@@ -3,11 +3,11 @@
 {% block main %}
 
     <div class='col-md-12'>
-        <h3 class="text-center">Tem certeza que deseja deletar {{ activity.created_at }}?</h3>
+        <h3 class="text-center">Tem certeza que deseja deletar {{ rule.created_at }}?</h3>
         <form class="text-center" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="btn-group" role="group" aria-label="Activities operations">
-                <a class="btn btn-primary" href="{% url 'activities_list' discipline_id %}" role="button">Voltar</a>
+            <div class="btn-group" role="group" aria-label="Rules operations">
+                <a class="btn btn-primary" href="{% url 'rules_list' %}" role="button">Voltar</a>
                 <button type="submit" class="btn btn-danger">Tenho certeza</button>
             </div>
 

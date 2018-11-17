@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="text-center">Informações da Alocação</h3>
+            <br />
+            <div class="card">
+                <div class="card-header primary-color lighten-1 white-text">Nome da Atividade: {{ allocation.name }}</div>
+                <div class="card-body">
+                    Grupo: <strong>{{ allocation.workgroup.complete_identifier }}</strong>
+                    <br />
+                    Sala: <strong>{{ allocation.selected_room.full_identifier }}</strong>
+                    <br />
+                    Horário: <strong>{{ allocation.start_time }} - {{ allocation.end_time }}</strong>
+                    <br />
+                    Avaliadores:
+                    <ul>
+                    {% for evaluator in allocation.evaluators.all %}
+                        <li><strong>{{ evaluator.name }}</strong></li>
+                    {% endfor %}
+                    </ul>
+                    <br />
+                    <br />
+                </div>
+            </div>
+            <br />
+            <a class="btn btn-primary btn-block waves-effect" href="{% url 'allocations_list' event_id %}" role="button">
+                Voltar
+            </a>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+
+{% endblock %}

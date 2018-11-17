@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 class StudentsDeliveriesForm(ModelForm):
     class Meta:
         model = Delivery
-        fields = ['main_file', 'side_file']
+        fields = ['main_file', 'side_file', 'submission_comments']
         labels = {
             'main_file': _('Arquivo Principal'),
             'side_file': _('Arquivo Extra'),
