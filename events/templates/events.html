@@ -25,7 +25,7 @@
                                     <br />
                                     {% if not event.is_closed_event %}
                                         <div class="btn-group float-right" role="group" aria-label="Event home operations">
-                                            <a href="{% url 'allocations_list' event.pk %}" class="btn btn-success btn-sm">
+                                            <a id='manage-allocations-{{ event.pk }}' href="{% url 'allocations_list' event.pk %}" class="btn btn-success btn-sm">
                                                 <strong>Alocar grupos</strong>
                                             </a>
                                         </div>
