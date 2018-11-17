@@ -27,6 +27,8 @@ from rooms import urls as rooms_urls
 from events import urls as events_urls
 from allocations import urls as allocations_urls
 from evaluations import urls as evaluations_urls
+from rules import urls as rules_urls
+from scores import urls as scores_urls
 
 urlpatterns = [
     # path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
@@ -41,6 +43,8 @@ urlpatterns = [
     path('events/', include(events_urls), name='events'),
     path('allocations/<int:event_id>/', include(allocations_urls), name='allocations'),
     path('evaluations/<int:allocation_id>/', include(evaluations_urls), name='evaluations'),
+    path('rules/', include(rules_urls), name='rules'),
+    path('scores/<int:rule_id>/', include(scores_urls), name='scores'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('admin/', admin.site.urls),
     path('select2/', include(django_select2_urls)),

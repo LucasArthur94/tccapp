@@ -5,7 +5,7 @@
         "fields": {
             "block": "A",
             "floor": "T",
-            "identifier": "AT",
+            "identifier": "AT"
         }
     },
     {
@@ -14,7 +14,7 @@
         "fields": {
             "block": "A",
             "floor": "T",
-            "identifier": "ST",
+            "identifier": "ST"
         }
     }
 ]

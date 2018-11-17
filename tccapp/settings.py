@@ -58,7 +58,9 @@ INSTALLED_APPS = [
     'rooms',
     'events',
     'allocations',
-    'evaluations'
+    'evaluations',
+    'rules',
+    'scores'
 ]
 
 MIDDLEWARE = [

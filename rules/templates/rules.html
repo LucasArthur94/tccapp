@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">Listagem das Fórmulas</h3>
+            {% if rules|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Disciplina Quadrimestral</th>
+                                <th scope="col">Disciplina Semestral</th>
+                                <th scope="col">Evento Teórico</th>
+                                <th scope="col">Evento Prático</th>
+                                <th scope="col">Notas Calculadas?</th>
+                                <th scope="col">Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for rule in rules %}
+                            <tr>
+                                <th>
+                                    <a title="Ver mais" href="{% url 'disciplines_show' rule.quarter_discipline.pk %}">
+                                        {{ rule.quarter_discipline.pk }}
+                                    </a>
+                                </th>
+                                <th>
+                                    <a title="Ver mais" href="{% url 'disciplines_show' rule.semester_discipline.pk %}">
+                                        {{ rule.semester_discipline.pk }}
+                                    </a>
+                                </th>
+                                <th>
+                                    <a title="Ver mais" href="{% url 'events_show' rule.theoretical_event.pk %}">
+                                        {{ rule.theoretical_event.pk }}
+                                    </a>
+                                </th>
+                                <th>
+                                    <a title="Ver mais" href="{% url 'events_show' rule.practical_event.pk %}">
+                                        {{ rule.practical_event.pk }}
+                                    </a>
+                                </th>
+                                <th>{{ rule.last_runned_at }}</th>
+                                <th>
+                                    <a title="Ver Notas" id='manage-scores-{{ rule.pk }}' href="{% url 'scores_list' rule.pk %}">
+                                        <span class="fas fa-list-ul"></span>
+                                    </a>
+                                    |
+                                    <a title="Calcular Notas" id='calculate-scores-{{ rule.pk }}' href="{% url 'rules_run' rule.pk %}">
+                                        <span class="fas fa-clock"></span>
+                                    </a>
+                                    |
+                                    <a title="Ver mais" href="{% url 'rules_show' rule.pk %}">
+                                        <span class="fas fa-eye"></span>
+                                    </a>
+                                    |
+                                    <a title="Editar" href="{% url 'rules_update' rule.pk %}">
+                                        <span class="fas fa-user-edit"></span>
+                                    </a>
+                                    |
+                                    <a title="Apagar" href="{% url 'rules_delete' rule.pk %}">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </a>
+                                </th>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <br />
+                <h2 class='text-center'>Sem fórmulas cadastradas!</h2>
+            {% endif %}
+            {% if user.coordinator %}
+                <a href="{% url 'rules_new' %}" id="new-rule" class="btn btn-primary float-right"> Nova Fórmula</a>
+                <div class="clearfix"></div>
+            {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}
