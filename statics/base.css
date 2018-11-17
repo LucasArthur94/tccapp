@@ -5,3 +5,8 @@ nav {
 .container {
     padding-bottom: 5%;
 }
+
+.radio {
+    display: inline;
+    margin-right: 2%;
+}

@@ -1,5 +1,56 @@
 <div class="row">
     <div class="col-lg-12">
+        <h3 class="text-center">Minhas Avaliações em Aberto</h3>
+        <br />
+        {% if allocations|length > 0 %}
+            <div class="row">
+                {% for allocation in allocations %}
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header info-color lighten-1 white-text">Grupo {{ allocation.workgroup.complete_identifier }} - Sala {{ allocation.selected_room.full_identifier }} - {{ allocation.event.event_type }}</div>
+                            <div class="card-body">
+                                Horário: <strong>{{ allocation.start_time }} - {{ allocation.end_time }}</strong>
+                                <br />
+                                Avaliadores:
+                                <ul>
+                                {% for evaluator in allocation.evaluators.all %}
+                                    <li><strong>{{ evaluator.name }}</strong></li>
+                                {% endfor %}
+                                </ul>
+                                <br />
+                                <div class="btn-group float-right" role="group" aria-label="Allocation home operations">
+                                    <a href="{% url 'evaluations_list' allocation.pk %}" class="btn btn-warning btn-sm"> <strong>Ver Avaliações</strong></a>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="btn-group float-right" role="group" aria-label="Allocation home operations">
+                                    {% if user.coordinator %}
+                                        <a href="{% url 'allocations_show' allocation.event.pk allocation.pk %}" class="btn btn-info btn-sm">
+                                            <strong>Ver mais</strong>
+                                        </a>
+                                        <br />
+                                        <a href="{% url 'allocations_update' allocation.event.pk allocation.pk %}" class="btn btn-primary btn-sm">
+                                            <strong>Editar</strong>
+                                        </a>
+                                        <br />
+                                        <a href="{% url 'allocations_delete' allocation.event.pk allocation.pk %}" class="btn btn-danger btn-sm">
+                                            <strong>Apagar</strong>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <br />
+            <h2 class='text-center'>Não há grupos alocados neste evento!</h2>
+        {% endif %}
+        <br />
+    </div>
+    <div class="col-lg-12">
         <h3 class="text-center">Entregas</h3>
         <br />
         {% if deliveries|length > 0 %}

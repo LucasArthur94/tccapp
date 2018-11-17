@@ -5,7 +5,10 @@ from .forms import  AllocationsForm
 
 @login_required
 def allocations_list(request, event_id):
-    allocations = Allocation.objects.filter(event__id=event_id)
+    if request.user.is_superuser:
+        allocations = Allocation.objects.filter(event__id=event_id)
+    else:
+        allocations = Allocation.objects.filter(event__id=event_id, evaluators__in=[request.user])
     return render(request, 'allocations.html', {'allocations': allocations, 'event_id': event_id})
 
 @login_required
