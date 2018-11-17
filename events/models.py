@@ -14,7 +14,7 @@ class Event(models.Model):
     )
 
     # Required fields
-    REQUIRED_FIELDS = ('type', 'quadrimestral_discipline', 'semester_discipline', 'selected_date', 'start_time', 'end_time', 'created_at', 'updated_at')
+    REQUIRED_FIELDS = ('type', 'quarter_discipline', 'semester_discipline', 'selected_date', 'start_time', 'end_time', 'created_at', 'updated_at')
 
     type = models.CharField(
         max_length=3,
@@ -37,9 +37,6 @@ class Event(models.Model):
     )
 
     # Event methods
-    def is_valid_time(self):
-        return self.end_time > self.start_time
-
     def is_closed(self):
         return datetime.combine(self.selected_date, self.end_time) < datetime.now()
 
