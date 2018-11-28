@@ -9,6 +9,8 @@
                         <div class="card">
                             <div class="card-header info-color lighten-1 white-text">Grupo {{ allocation.workgroup.complete_identifier }} - Sala {{ allocation.selected_room.full_identifier }} - {{ allocation.event.event_type }}</div>
                             <div class="card-body">
+                                Dia: <strong>{{ allocation.event.selected_date }}</strong>
+                                <br />
                                 Horário: <strong>{{ allocation.start_time }} - {{ allocation.end_time }}</strong>
                                 <br />
                                 Avaliadores:
