@@ -7,11 +7,13 @@
             <h3 class="text-center">Informações da Alocação</h3>
             <br />
             <div class="card">
-                <div class="card-header primary-color lighten-1 white-text">Nome da Atividade: {{ allocation.name }}</div>
+                <div class="card-header primary-color lighten-1 white-text">Alocação</div>
                 <div class="card-body">
                     Grupo: <strong>{{ allocation.workgroup.complete_identifier }}</strong>
                     <br />
                     Sala: <strong>{{ allocation.selected_room.full_identifier }}</strong>
+                    <br />
+                    Dia: <strong>{{ allocation.event.selected_date }}</strong>
                     <br />
                     Horário: <strong>{{ allocation.start_time }} - {{ allocation.end_time }}</strong>
                     <br />
