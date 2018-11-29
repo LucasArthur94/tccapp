@@ -62,6 +62,10 @@ Uma vez com as dependências instaladas e as migrações realizadas, hora de rod
 
 Ele subirá um servidor no endereço `localhost:8000`
 
+Para a aplicação, é necessário também subir um servidor SMTP de E-mails. Para isso, rodar o seguinte comando:
+
+`python -m smtpd -n -c DebuggingServer localhost:1025`
+
 ### Rodar os testes
 
 A aplicação possui testes de funcionamento. Para rodar todos eles, basta rodar o comando:
