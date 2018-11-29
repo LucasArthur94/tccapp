@@ -89,7 +89,7 @@ def evaluations_delete(request, allocation_id, id):
 
     allocation = get_object_or_404(Allocation, pk=allocation_id)
 
-    if not allocation or request.user not in allocation.evaluators.all() or allocation.event.is_closed():
+    if not request.user.is_superuser() or not allocation or request.user not in allocation.evaluators.all() or allocation.event.is_closed():
         return render(request, 'statuses/401.html')
 
     if request.method == 'POST':
