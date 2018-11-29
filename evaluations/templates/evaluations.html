@@ -28,7 +28,7 @@
                                             </a>
                                             <br />
                                         {% endif %}
-                                        {% if evaluation.owner == request.user and not allocation.event.is_closed %}
+                                        {% if request.user.is_superuser or evaluation.owner == request.user and not allocation.event.is_closed %}
                                             <a href="{% url 'evaluations_delete' allocation.pk evaluation.pk %}" class="btn btn-danger btn-sm">
                                                 <strong>Apagar</strong>
                                             </a>
