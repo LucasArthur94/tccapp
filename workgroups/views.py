@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import  Workgroup
 from .forms import  WorkgroupsForm
 from .utils import send_new_workgroup_mail
@@ -26,6 +27,7 @@ def workgroups_new(request):
         workgroup = workgroups_form.save()
         send_new_workgroup_mail(workgroup)
 
+        messages.success(request, 'Grupo de trabalho salvo com sucesso!')
         return redirect('workgroups_list')
     return render(request, 'workgroup_form.html', {'workgroups_form': workgroups_form})
 
@@ -49,6 +51,7 @@ def workgroups_update(request, id):
 
     if workgroups_form.is_valid():
         workgroups_form.save()
+        messages.success(request, 'Grupo de trabalho alterado com sucesso!')
         return redirect('workgroups_list')
 
     return render(request, 'workgroup_form.html', {'workgroups_form': workgroups_form})
@@ -62,6 +65,7 @@ def workgroups_delete(request, id):
 
     if request.method == 'POST':
         workgroup.delete()
+        messages.success(request, 'Grupo de trabalho excluído com sucesso!')
         return redirect('workgroups_list')
 
     return render(request, 'workgroup_delete_confirm.html', {'workgroup': workgroup})
@@ -80,6 +84,7 @@ def workgroups_confirm_participation(request, id):
         elif request.user == workgroup.guest:
             workgroup.guest_validated_participation = True
             workgroup.save()
+        messages.success(request, 'Participação confirmada com sucesso!')
         return redirect('workgroups_list')
 
     return render(request, 'workgroup_confirm_participation.html', {'workgroup': workgroup})

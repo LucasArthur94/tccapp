@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import Room
 from .forms import RoomsForm
 
@@ -20,6 +21,7 @@ def rooms_new(request):
 
     if rooms_form.is_valid():
         rooms_form.save()
+        messages.success(request, 'Sala salva com sucesso!')
         return redirect('rooms_list')
     return render(request, 'room_form.html', {'rooms_form': rooms_form})
 
@@ -42,6 +44,7 @@ def rooms_update(request, id):
 
     if rooms_form.is_valid():
         rooms_form.save()
+        messages.success(request, 'Sala alterada com sucesso!')
         return redirect('rooms_list')
     return render(request, 'room_form.html', {'rooms_form': rooms_form})
 
@@ -54,5 +57,6 @@ def rooms_delete(request, id):
 
     if request.method == 'POST':
         room.delete()
+        messages.success(request, 'Sala excluída com sucesso!')
         return redirect('rooms_list')
     return render(request, 'room_delete_confirm.html', {'room': room})
