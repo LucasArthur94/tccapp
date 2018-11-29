@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from datetime import datetime
+from django.contrib import messages
 from django.db.models import Q
+from datetime import datetime
 from decimal import Decimal
 from .models import Rule
 from .forms import RulesForm
@@ -32,6 +33,7 @@ def rules_new(request):
     if rules_form.is_valid():
         rules_form.save()
 
+        messages.success(request, 'Regra de cálculo de notas salva com sucesso!')
         return redirect('rules_list')
     return render(request, 'rule_form.html', {'rules_form': rules_form})
 
@@ -59,6 +61,8 @@ def rules_run(request, id):
     rule.save()
 
     rules = Rule.objects.all()
+
+    messages.success(request, 'As notas para a regra desejada foram calculadas com sucesso!')
     return render(request, 'rules.html', {'rules': rules})
 
 @login_required
@@ -71,6 +75,7 @@ def rules_update(request, id):
 
     if rules_form.is_valid():
         rules_form.save()
+        messages.success(request, 'Regra de cálculo de notas alterada com sucesso!')
         return redirect('rules_list')
 
     return render(request, 'rule_form.html', {'rules_form': rules_form})
@@ -84,6 +89,7 @@ def rules_delete(request, id):
 
     if request.method == 'POST':
         rule.delete()
+        messages.success(request, 'Regra de cálculo de notas excluída com sucesso!')
         return redirect('rules_list')
 
     return render(request, 'rule_delete_confirm.html', {'rule': rule})
@@ -107,10 +113,13 @@ def calculate_deliveries_average(workgroup):
 
     total_score = Decimal(0.0)
     total_weight = 0
+    readed_activities = []
 
     for delivery in deliveries:
-        total_score += delivery.score * delivery.activity.weight
-        total_weight += delivery.activity.weight
+        if delivery.activity not in readed_activities:
+            total_score += delivery.score * delivery.activity.weight
+            total_weight += delivery.activity.weight
+            readed_activities.append(delivery.activity)
 
     return total_score / total_weight
 

@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import  Delivery
 from .forms import StudentsDeliveriesForm, AdvisorsGuestsDeliveriesForm
 from .utils import send_new_delivery_mail
@@ -47,6 +48,7 @@ def deliveries_new(request, activity_id):
 
         send_new_delivery_mail(new_delivery)
 
+        messages.success(request, 'Submissão realizada com sucesso!')
         return redirect('deliveries_list', activity_id=activity_id)
     return render(request, 'student_delivery_form.html', {'students_deliveries_form': students_deliveries_form, 'activity': activity})
 
@@ -68,6 +70,7 @@ def deliveries_update(request, activity_id, id):
         new_delivery.author_id = request.user.pk
         new_delivery.save()
 
+        messages.success(request, 'Submissão alterada com sucesso!')
         return redirect('deliveries_list', activity_id=activity_id)
     return render(request, 'student_delivery_form.html', {'students_deliveries_form': students_deliveries_form, 'activity': activity})
 
@@ -95,6 +98,7 @@ def deliveries_review(request, activity_id, id):
             new_delivery.status = 'AAD'
         new_delivery.save()
 
+        messages.success(request, 'Submissão revisada com sucesso!')
         return redirect('deliveries_list', activity_id=activity_id)
     return render(request, 'advisor_guest_delivery_form.html', {'advisors_guests_deliveries_form': advisors_guests_deliveries_form, 'activity': activity})
 
@@ -111,6 +115,7 @@ def deliveries_delete(request, activity_id, id):
 
     if request.method == 'POST':
         delivery.delete()
+        messages.success(request, 'Submissão excluída com sucesso!')
         return redirect('deliveries_list', activity_id=activity_id)
 
     return render(request, 'delivery_delete_confirm.html', {'delivery': delivery})

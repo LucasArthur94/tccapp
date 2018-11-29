@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import  Activity
 from .forms import  ActivitiesForm
 
@@ -20,6 +21,7 @@ def activities_new(request, discipline_id):
         new_activity.discipline_id = discipline_id
         new_activity.save()
 
+        messages.success(request, 'Atividade cadastrada com sucesso!')
         return redirect('activities_list', discipline_id=discipline_id)
     return render(request, 'activity_form.html', {'activities_form': activities_form, 'discipline_id': discipline_id})
 
@@ -42,6 +44,7 @@ def activities_update(request, discipline_id, id):
 
     if activities_form.is_valid():
         activities_form.save()
+        messages.success(request, 'Atividade atualizada com sucesso!')
         return redirect('activities_list', discipline_id=discipline_id)
 
     return render(request, 'activity_form.html', {'activities_form': activities_form, 'discipline_id': discipline_id})
@@ -55,6 +58,7 @@ def activities_delete(request, discipline_id, id):
 
     if request.method == 'POST':
         activity.delete()
+        messages.success(request, 'Atividade excluída com sucesso!')
         return redirect('activities_list', discipline_id=discipline_id)
 
     return render(request, 'activity_delete_confirm.html', {'activity': activity, 'discipline_id': discipline_id})

@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import  Evaluation
 from .forms import TheoreticalEvaluationForm, PracticalEvaluationForm
 from workgroups.models import Workgroup
@@ -52,6 +53,7 @@ def evaluations_new(request, allocation_id):
         new_evaluation.allocation_id = allocation_id
         new_evaluation.save()
 
+        messages.success(request, 'Avaliação salva com sucesso!')
         return redirect('evaluations_list', allocation_id=allocation_id)
     return render(request, 'evaluation_form.html', {'evaluations_form': evaluations_form, 'allocation': allocation})
 
@@ -77,6 +79,7 @@ def evaluations_update(request, allocation_id, id):
         new_evaluation.allocation_id = allocation_id
         new_evaluation.save()
 
+        messages.success(request, 'Avaliação alterada com sucesso!')
         return redirect('evaluations_list', allocation_id=allocation_id)
     return render(request, 'evaluation_form.html', {'evaluations_form': evaluations_form, 'allocation': allocation})
 
@@ -91,6 +94,7 @@ def evaluations_delete(request, allocation_id, id):
 
     if request.method == 'POST':
         evaluation.delete()
+        messages.success(request, 'Avaliação excluída com sucesso!')
         return redirect('evaluations_list', allocation_id=allocation_id)
 
     return render(request, 'evaluation_delete_confirm.html', {'evaluation': evaluation, 'allocation': allocation})

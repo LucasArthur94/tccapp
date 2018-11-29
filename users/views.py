@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import  User, Student, Teacher, Guest, Coordinator
 from .forms import  UsersForm, StudentsForm, TeachersForm, GuestsForm, CoordinatorsForm, StudentBulkRegisterForm
 from .utils import xls_jupiter_parser, send_welcome_mail
@@ -36,6 +37,7 @@ def teachers_new(request):
 
         send_welcome_mail(new_user)
 
+        messages.success(request, 'Docente salvo com sucesso!')
         return redirect('teachers_list')
     return render(request, 'teachers/teacher_form.html', {'users_form': users_form, 'teachers_form': teachers_form})
 
@@ -63,6 +65,7 @@ def teachers_update(request, id):
         new_user.save()
 
         teachers_form.save()
+        messages.success(request, 'Docente alterado com sucesso!')
         return redirect('teachers_list')
 
     return render(request, 'teachers/teacher_form.html', {'users_form': users_form, 'teachers_form': teachers_form})
@@ -80,6 +83,7 @@ def teachers_delete(request, id):
     if request.method == 'POST':
         teacher.user.delete()
         teacher.delete()
+        messages.success(request, 'Docente excluído com sucesso!')
         return redirect('teachers_list')
 
     return render(request, 'teachers/teacher_delete_confirm.html', {'teacher': teacher})
@@ -115,6 +119,7 @@ def students_new(request):
 
         send_welcome_mail(new_user)
 
+        messages.success(request, 'Estudante salvo com sucesso!')
         return redirect('students_list')
     return render(request, 'students/student_form.html', {'users_form': users_form, 'students_form': students_form})
 
@@ -142,6 +147,7 @@ def students_update(request, id):
         new_user.save()
 
         students_form.save()
+        messages.success(request, 'Estudante alterado com sucesso!')
         return redirect('students_list')
 
     return render(request, 'students/student_form.html', {'users_form': users_form, 'students_form': students_form})
@@ -159,6 +165,7 @@ def students_delete(request, id):
     if request.method == 'POST':
         student.user.delete()
         student.delete()
+        messages.success(request, 'Estudante excluído com sucesso!')
         return redirect('students_list')
 
     return render(request, 'students/student_delete_confirm.html', {'student': student})
@@ -175,6 +182,7 @@ def students_new_bulk(request):
 
         xls_jupiter_parser(new_students_xls)
 
+        messages.success(request, 'Múltiplos estudantes salvos com sucesso!')
         return redirect('students_list')
     return render(request, 'students/new_bulk_form.html', {'student_bulk_register_form': student_bulk_register_form})
 
@@ -210,6 +218,7 @@ def guests_new(request):
 
         send_welcome_mail(new_user)
 
+        messages.success(request, 'Convidado salvo com sucesso!')
         return redirect('guests_list')
     return render(request, 'guests/guest_form.html', {'users_form': users_form, 'guests_form': guests_form})
 
@@ -237,6 +246,7 @@ def guests_update(request, id):
         new_user.save()
 
         guests_form.save()
+        messages.success(request, 'Convidado alterado com sucesso!')
         return redirect('guests_list')
 
     return render(request, 'guests/guest_form.html', {'users_form': users_form, 'guests_form': guests_form})
@@ -254,6 +264,7 @@ def guests_delete(request, id):
     if request.method == 'POST':
         guest.user.delete()
         guest.delete()
+        messages.success(request, 'Convidado excluído com sucesso!')
         return redirect('guests_list')
 
     return render(request, 'guests/guest_delete_confirm.html', {'guest': guest})

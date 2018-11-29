@@ -21,6 +21,9 @@
         {% include 'header.html' %}
     {% endblock %}
     <div class="container">
+        {% if messages %}
+            {% include 'messages.html' %}
+        {% endif %}
         {% block main %}
         {% endblock %}
     </div>

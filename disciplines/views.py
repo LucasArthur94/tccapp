@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import  Discipline
 from .forms import  DisciplinesForm
 
@@ -23,6 +24,7 @@ def disciplines_new(request):
     if disciplines_form.is_valid():
         disciplines_form.save()
 
+        messages.success(request, 'Disciplina salva com sucesso!')
         return redirect('disciplines_list')
     return render(request, 'discipline_form.html', {'disciplines_form': disciplines_form})
 
@@ -42,6 +44,7 @@ def disciplines_update(request, id):
 
     if disciplines_form.is_valid():
         disciplines_form.save()
+        messages.success(request, 'Disciplina alterada com sucesso!')
         return redirect('disciplines_list')
 
     return render(request, 'discipline_form.html', {'disciplines_form': disciplines_form})
@@ -55,6 +58,7 @@ def disciplines_delete(request, id):
 
     if request.method == 'POST':
         discipline.delete()
+        messages.success(request, 'Disciplina excluída com sucesso!')
         return redirect('disciplines_list')
 
     return render(request, 'discipline_delete_confirm.html', {'discipline': discipline})

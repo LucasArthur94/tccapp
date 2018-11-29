@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import  Event
 from .forms import  EventsForm
 
@@ -21,6 +22,7 @@ def events_new(request):
     if events_form.is_valid():
         events_form.save()
 
+        messages.success(request, 'Evento salvo com sucesso!')
         return redirect('events_list')
     return render(request, 'event_form.html', {'events_form': events_form})
 
@@ -43,6 +45,7 @@ def events_update(request, id):
 
     if events_form.is_valid():
         events_form.save()
+        messages.success(request, 'Evento alterado com sucesso!')
         return redirect('events_list')
 
     return render(request, 'event_form.html', {'events_form': events_form})
@@ -56,6 +59,7 @@ def events_delete(request, id):
 
     if request.method == 'POST':
         event.delete()
+        messages.success(request, 'Evento excluído com sucesso!')
         return redirect('events_list')
 
     return render(request, 'event_delete_confirm.html', {'event': event})
