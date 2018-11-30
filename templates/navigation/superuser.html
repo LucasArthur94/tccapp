@@ -1,26 +1,25 @@
 {% load active_link_tags %}
 
-<li class="nav-item {% active_link 'disciplines_list' %}">
-  <a class="nav-link" id="coordinator-disciplines" href="{% url 'disciplines_list' %}">Disciplinas</a>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" id="navbarDropdownPeopleLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestão de Pessoas</a>
+  <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownPeopleLink">
+      <a class="dropdown-item {% active_link 'teachers_list' %}" id="coordinator-teachers" href="{% url 'teachers_list' %}">Docentes</a>
+      <a class="dropdown-item {% active_link 'students_list' %}" id="coordinator-students" href="{% url 'students_list' %}">Alunos</a>
+      <a class="dropdown-item {% active_link 'guests_list' %}" id="coordinator-guests" href="{% url 'guests_list' %}">Convidados Externos</a>
+  </div>
 </li>
-<li class="nav-item {% active_link 'teachers_list' %}">
-  <a class="nav-link" id="coordinator-teachers" href="{% url 'teachers_list' %}">Docentes</a>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" id="navbarDropdownDisciplinesLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestão de Disciplinas</a>
+  <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownDisciplinesLink">
+    <a class="dropdown-item {% active_link 'disciplines_list' %}" id="coordinator-disciplines" href="{% url 'disciplines_list' %}">Disciplinas</a>
+    <a class="dropdown-item {% active_link 'workgroups_list' %}" id="coordinator-workgroups" href="{% url 'workgroups_list' %}">Grupos de Trabalho</a>
+  </div>
 </li>
-<li class="nav-item {% active_link 'students_list' %}">
-  <a class="nav-link" id="coordinator-students" href="{% url 'students_list' %}">Alunos</a>
-</li>
-<li class="nav-item {% active_link 'guests_list' %}">
-  <a class="nav-link" id="coordinator-guests" href="{% url 'guests_list' %}">Convidados Externos</a>
-</li>
-<li class="nav-item {% active_link 'workgroups_list' %}">
-  <a class="nav-link" id="coordinator-workgroups" href="{% url 'workgroups_list' %}">Grupos de Trabalho</a>
-</li>
-<li class="nav-item {% active_link 'rooms_list' %}">
-  <a class="nav-link" id="coordinator-rooms" href="{% url 'rooms_list' %}">Salas</a>
-</li>
-<li class="nav-item {% active_link 'events_list' %}">
-  <a class="nav-link" id="coordinator-events" href="{% url 'events_list' %}">Eventos</a>
-</li>
-<li class="nav-item {% active_link 'rules_list' %}">
-  <a class="nav-link" id="coordinator-rules" href="{% url 'rules_list' %}">Fórmulas</a>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" id="navbarDropdownDisciplinesLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestão de Eventos e Notas</a>
+  <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownDisciplinesLink">
+    <a class="dropdown-item {% active_link 'rooms_list' %}" id="coordinator-rooms" href="{% url 'rooms_list' %}">Salas</a>
+    <a class="dropdown-item {% active_link 'events_list' %}" id="coordinator-events" href="{% url 'events_list' %}">Eventos</a>
+    <a class="dropdown-item {% active_link 'rules_list' %}" id="coordinator-rules" href="{% url 'rules_list' %}">Fórmulas</a>
+  </div>
 </li>

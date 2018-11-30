@@ -56,7 +56,9 @@
             <br />
             {% if user.coordinator %}
                 <a href="{% url 'allocations_new' event_id %}" id="new-allocation" class="btn btn-primary float-right"> Nova Alocação</a>
-                <a href="{% url 'allocations_send_info_email' event_id %}" id="send-info-email-allocations" class="btn btn-info float-right"> Avisar Convidados por E-mail</a>
+                {% if allocations|length > 0 %}
+                    <a href="{% url 'allocations_send_info_email' event_id %}" id="send-info-email-allocations" class="btn btn-info float-right"> Avisar Convidados por E-mail</a>
+                {% endif %}
             {% endif %}
             <a class="btn btn-outline-primary waves-effect float-right" href="{% url 'events_list' %}" role="button">
                 Voltar
