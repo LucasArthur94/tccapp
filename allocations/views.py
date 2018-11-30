@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from events.models import  Event
 from .models import  Allocation
 from .forms import  AllocationsForm
 from .utils import send_new_allocation_mail
@@ -23,6 +24,12 @@ def allocations_new(request, event_id):
 
     if allocations_form.is_valid():
         new_allocation = allocations_form.save(commit=False)
+
+        event = get_object_or_404(Event, pk=event_id)
+
+        if new_allocation.start_time < event.start_time or new_allocation.end_time > event.end_time:
+            messages.error(request, 'Favor alocar dentro do horário do evento: das %s as %s' % (str(event.start_time), str(event.end_time)))
+            return render(request, 'allocation_form.html', {'allocations_form': allocations_form, 'event_id': event_id})
 
         previous_allocations = Allocation.objects.filter(event__id=event_id, selected_room=new_allocation.selected_room)
         for allocation in previous_allocations:
