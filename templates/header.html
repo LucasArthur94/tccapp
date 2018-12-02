@@ -19,18 +19,25 @@
       {% endif %}
     </ul>
     <ul class="navbar-nav ml-auto">
+      {# {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'admin:index' %}">
+            Administração do Django
+          </a>
+        </li>
+      {% endif %} #}
       {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'change_password' %}">
-              Alterar Senha
-            </a>
-          </li>
+            Alterar Senha
+          </a>
+        </li>
       {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'password_reset' %}">
-              Recuperar Senha
-            </a>
-          </li>
+            Recuperar Senha
+          </a>
+        </li>
       {% endif %}
       <li class="nav-item">
         {% if user.is_authenticated %}

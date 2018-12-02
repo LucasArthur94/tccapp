@@ -46,6 +46,6 @@ urlpatterns = [
     path('rules/', include(rules_urls), name='rules'),
     path('scores/<int:rule_id>/', include(scores_urls), name='scores'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('select2/', include(django_select2_urls)),
 ]
