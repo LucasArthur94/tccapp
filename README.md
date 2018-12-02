@@ -2,7 +2,7 @@
 Bem-vindos ao repositório do projeto de formatura do grupo C10, de Engenharia de Computação da Poli-USP!
 
 ## Arquitetura Básica
-O projeto roda com um banco de dados (que pode ser SQLite ou PostgreSQL, dependendo do ambiente) e com uma instância do Redis para cache (em especial para suporte do Select2). Para hospedar os arquivos, foi usado o Google Drive, . Por fim, para o front-end, foi usado como auxilio o MDBootstrap e também o JQuery.
+O sistema foi construído usando Django na versão 2.1, roda com um banco de dados (que pode ser SQLite ou PostgreSQL, dependendo do ambiente) e com uma instância do Redis para cache (em especial para suporte do Select2). Para hospedar os arquivos, foi usado o Google Drive. Por fim, para o front-end, foi usado como auxilio o MDBootstrap e também o JQuery.
 
 ## Primeiros Passos (realizados no Ubuntu 18.04)
 Para você que deseja fazer manutenção ou contribuição no projeto, temos os seguintes passos.
@@ -18,7 +18,7 @@ Requer Python > 3 e PiP (gerenciador de pacotes) instalado.
 
 [Instruções para Download](https://www.djangoproject.com/download/)
 
-Vale lembrar que a versão usada no projeto é a 2.1, atualizações devem ser feitas com cautela.
+Vale lembrar que a versão usada no projeto é a 2.1, atualizações do tipo 2.x ou superiores devem ser feitas com cautela.
 
 ### Configuração do Ambiente Virtual (Virtual Environment)
 
