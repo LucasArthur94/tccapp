@@ -22,22 +22,22 @@
                             <tr>
                                 <th>
                                     <a title="Ver mais" href="{% url 'disciplines_show' rule.quarter_discipline.pk %}">
-                                        {{ rule.quarter_discipline.pk }}
+                                        {{ rule.quarter_discipline.start_date }} - {{ rule.quarter_discipline.end_date }}
                                     </a>
                                 </th>
                                 <th>
                                     <a title="Ver mais" href="{% url 'disciplines_show' rule.semester_discipline.pk %}">
-                                        {{ rule.semester_discipline.pk }}
+                                        {{ rule.semester_discipline.start_date }} - {{ rule.semester_discipline.end_date }}
                                     </a>
                                 </th>
                                 <th>
                                     <a title="Ver mais" href="{% url 'events_show' rule.theoretical_event.pk %}">
-                                        {{ rule.theoretical_event.pk }}
+                                        {{ rule.theoretical_event.selected_date }}
                                     </a>
                                 </th>
                                 <th>
                                     <a title="Ver mais" href="{% url 'events_show' rule.practical_event.pk %}">
-                                        {{ rule.practical_event.pk }}
+                                        {{ rule.practical_event.selected_date }}
                                     </a>
                                 </th>
                                 <th>{{ rule.last_runned_at }}</th>
