@@ -3,18 +3,72 @@
         "model": "rooms.room",
         "pk": 1,
         "fields": {
-            "block": "A",
-            "floor": "T",
-            "identifier": "AT"
+            "block": "B",
+            "floor": "2",
+            "identifier": "04"
         }
     },
     {
         "model": "rooms.room",
         "pk": 2,
         "fields": {
-            "block": "A",
-            "floor": "T",
-            "identifier": "ST"
+            "block": "B",
+            "floor": "2",
+            "identifier": "06"
+        }
+    },
+    {
+        "model": "rooms.room",
+        "pk": 3,
+        "fields": {
+            "block": "B",
+            "floor": "2",
+            "identifier": "08"
+        }
+    },
+    {
+        "model": "rooms.room",
+        "pk": 4,
+        "fields": {
+            "block": "B",
+            "floor": "2",
+            "identifier": "09"
+        }
+    },
+    {
+        "model": "rooms.room",
+        "pk": 5,
+        "fields": {
+            "block": "B",
+            "floor": "2",
+            "identifier": "10"
+        }
+    },
+    {
+        "model": "rooms.room",
+        "pk": 6,
+        "fields": {
+            "block": "B",
+            "floor": "2",
+            "identifier": "12"
+        }
+    },
+    {
+        "model": "rooms.room",
+        "pk": 7,
+        "fields": {
+            "block": "C",
+            "floor": "1",
+            "identifier": "30"
+        }
+    },
+    {
+        "model": "rooms.room",
+        "pk": 8,
+        "fields": {
+            "block": "C",
+            "floor": "1",
+            "identifier": "49"
         }
     }
 ]
