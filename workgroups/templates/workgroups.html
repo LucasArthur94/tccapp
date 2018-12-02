@@ -57,7 +57,7 @@
                                     {% if user.is_superuser %}
                                         |
                                         <a title="Editar" href="{% url 'workgroups_update' workgroup.pk %}">
-                                            <span class="fas fa-user-edit"></span>
+                                            <span class="fas fa-edit"></span>
                                         </a>
                                         |
                                         <a title="Apagar" href="{% url 'workgroups_delete' workgroup.pk %}">
