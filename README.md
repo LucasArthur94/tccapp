@@ -2,7 +2,7 @@
 Bem-vindos ao repositório do projeto de formatura do grupo C10, de Engenharia de Computação da Poli-USP!
 
 ## Arquitetura Básica
-O projeto roda com um banco de dados (que pode ser SQLite ou PostgreSQL, dependendo do ambiente) e com uma instância do Redis para cache (em especial para suporte do Select2).
+O projeto roda com um banco de dados (que pode ser SQLite ou PostgreSQL, dependendo do ambiente) e com uma instância do Redis para cache (em especial para suporte do Select2). Para hospedar os arquivos, foi usado o Google Drive, . Por fim, para o front-end, foi usado como auxilio o MDBootstrap e também o JQuery.
 
 ## Primeiros Passos (realizados no Ubuntu 18.04)
 Para você que deseja fazer manutenção ou contribuição no projeto, temos os seguintes passos.
@@ -53,6 +53,10 @@ Além disso, há alguns dados padrões na aplicação (de usuários e salas). Pa
 
 * Dados de Usuários: `python manage.py loaddata users`
 * Dados de Salas: `python manage.py loaddata rooms`
+
+### Configurar o Google Drive
+
+A chave `.json` não acompanha o projeto, sendo necessário gerar uma nova nos serviços de cloud do Google. Para isso, visite o site do pacote Django e siga as instruções da seção de Pré-requisitos: [google-drive-storage](https://django-googledrive-storage.readthedocs.io/en/latest/). Salve o `.json` gerado no diretório `./staticfiles/json/` como `gdrive.json`.
 
 ### Rodar o Projeto
 
