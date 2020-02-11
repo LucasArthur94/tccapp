@@ -6,7 +6,7 @@ coverage==4.5.1
 diff-match-patch==20121119
 dj-database-url==0.5.0
 dj-static==0.0.6
-Django==2.1.2
+Django==2.2.10
 django-active-link==0.1.5
 django-appconf==1.0.2
 django-bootstrap==0.2.4
